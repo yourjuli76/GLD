@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLD 月間賞金制度 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Yu Gothic', 'Meiryo', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            color: #212529;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: #212529;
+            margin-bottom: 30px;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .general-rules {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .general-rules h2 {
+            color: #212529;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .rule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .rule-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+            font-size: 0.9rem;
+            color: #212529;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .tab {
+            background: white;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background: #f8f9fa;
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .tab.active {
+            background: #007bff;
+            color: white;
+            font-weight: 600;
+            border-color: #007bff;
+        }
+
+        .department {
+            display: none;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .department.active {
+            display: block;
+        }
+
+        .department h2 {
+            color: #212529;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .incentive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+        }
+
+        .incentive-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .incentive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #007bff;
+        }
+
+        .incentive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #007bff;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #212529;
+            margin-bottom: 15px;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .condition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .condition-table th {
+            background: #007bff;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .condition-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+            color: #212529;
+        }
+
+        .condition-table tr:nth-child(even) {
+            background: white;
+        }
+
+        .amount {
+            font-weight: bold;
+            color: #dc3545;
+            font-size: 1rem;
+        }
+
+        .special-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #856404;
+            line-height: 1.4;
+        }
+
+        .rank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rank-item {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid #2196f3;
+        }
+
+        .rank-label {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 0.9rem;
+        }
+
+        .rank-value {
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        .point-table {
+            margin-bottom: 20px;
+        }
+
+        .point-table h4 {
+            margin: 15px 0 10px 0;
+            color: #764ba2;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .incentive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+
+            .condition-table {
+                font-size: 0.75rem;
+            }
+
+            .condition-table th,
+            .condition-table td {
+                padding: 4px;
+            }
+        }
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.company-logo {
+    height: 60px;
+    width: auto;
+    max-width: 300px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.company-logo:hover {
+    transform: scale(1.05);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .company-logo {
+        height: 45px;
+        max-width: 250px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+<div class="logo-container">
+        <img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="Global Daily Logo" class="company-logo">
+    </div>
+            <h1>🏆 2025年 Global Daily 月間賞金制度</h1>
+            <p>2025年6月1日改定</p>
+        </div>
+
+        <div class="general-rules">
+            <h2>📋 個人賞金 支給条件</h2>
+            <div class="rule-grid">
+                <div class="rule-item">
+                    <strong>個人賞金の合計上限額：</strong>30万円<br>
+                    ※3～6、24は上記規定に当たらない
+                </div>
+                <div class="rule-item">
+                    <strong>①営業利益500万円以上の場合：</strong><br>
+                    全ての賞金規定において200％の支給とする
+                </div>
+                <div class="rule-item">
+                    <strong>②営業利益が赤字の場合：</strong><br>
+                    全社員の賞金支給はなしとする
+                </div>
+                <div class="rule-item">
+                    <strong>③前月の基準目標の達成率が70％未満時：</strong><br>
+                    半額の支給となる
+                </div>
+                <div class="rule-item">
+                    <strong>④半期ごとにリセット：</strong><br>
+                    会社としての目標を達した場合、個人目標100％以上であれば、未支給分を支払う
+                </div>
+                <div class="rule-item">
+                    <strong>⑤申込書提出：</strong><br>
+                    指定日までに申込書が提出されていない場合は、提出されるまで未支給
+                </div>
+                <div class="rule-item">
+                    <strong>⑥支給単位：</strong><br>
+                    月間賞金は1,000円単位での支給とし、全ての賞金合計額の1,000円未満は切り捨てて支給
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showDepartment('sales')">📈 営業</button>
+            <button class="tab" onclick="showDepartment('creative')">🎨 クリエイティブ</button>
+            <button class="tab" onclick="showDepartment('media')">📺 メディア管理</button>
+            <button class="tab" onclick="showDepartment('marketing')">📊 マーケティング</button>
+            <button class="tab" onclick="showDepartment('spc')">🔧 SPC</button>
+            <button class="tab" onclick="showDepartment('pr')">📢 広報・経理</button>
+            <button class="tab" onclick="showDepartment('special')">⭐ 特別賞</button>
+        </div>
+
+        <!-- 営業部門 -->
+        <div id="sales" class="department active">
+            <h2>📈 営業</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">１．新規獲得賞</div>
+                    <div class="card-subtitle">売上50万円以上の月間獲得新規本数が下記の基準を超えた場合支給</div>
+                    <table class="condition-table">
+                        <tr><th>新規本数</th><th>賞金</th></tr>
+                        <tr><td>売上50万円以上　2本</td><td class="amount">5,000円</td></tr>
+                        <tr><td>売上50万円以上　3本</td><td class="amount">30,000円</td></tr>
+                    </table>
+                    <div class="special-note">
+                        ※下記は営業利益500万円を超えても倍の対象外です。<br>
+                        <strong>【新規定義】</strong><br>
+                        ・同一クライアントでも他部署（新規コード）予算は新規。<br>
+                        ・休眠クライアントでも2023年12月以降に出稿がないクライアントは新規。
+                    </div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">２．JAPANKURU・調査獲得賞</div>
+                    <div class="card-subtitle">（個人の基準利益完遂賞が条件）</div>
+                    <table class="condition-table">
+                        <tr><th>契約売上</th><th>賞金</th></tr>
+                        <tr><td>売上50万円未満</td><td class="amount">5,000円</td></tr>
+                        <tr><td>売上51～100万円</td><td class="amount">8,000円</td></tr>
+                        <tr><td>売上101～150万円</td><td class="amount">12,000円</td></tr>
+                        <tr><td>売上151～200万円</td><td class="amount">15,000円</td></tr>
+                        <tr><td>売上201～250万円</td><td class="amount">20,000円</td></tr>
+                        <tr><td>売上251～300万円</td><td class="amount">25,000円</td></tr>
+                        <tr><td>売上301～350万円</td><td class="amount">30,000円</td></tr>
+                        <tr><td>売上351～400万円</td><td class="amount">35,000円</td></tr>
+                        <tr><td>売上401～500万円</td><td class="amount">40,000円</td></tr>
+                        <tr><td>売上501万円以上</td><td class="amount">50,000円</td></tr>
+                    </table>
+                    <div class="special-note">※個人基準目標達成が支給条件</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">3．月間粗利益完遂賞</div>
+                    <div class="card-subtitle">一般社員及び谷本係長</div>
+                    <table class="condition-table">
+                        <tr><th>達成額</th><th>F1～F2</th><th>F3～F4</th><th>D1</th></tr>
+                        <tr><td>151～174万円</td><td class="amount">8,000</td><td class="amount">5,000</td><td>0</td></tr>
+                        <tr><td>175～199万円</td><td class="amount">10,000</td><td class="amount">8,000</td><td>0</td></tr>
+                        <tr><td>200～249万円</td><td class="amount">15,000</td><td class="amount">15,000</td><td>0</td></tr>
+                        <tr><td>250～299万円</td><td class="amount">40,000</td><td class="amount">40,000</td><td class="amount">40,000</td></tr>
+                        <tr><td>300～349万円</td><td class="amount">60,000</td><td class="amount">60,000</td><td class="amount">60,000</td></tr>
+                        <tr><td>350～399万円</td><td class="amount">80,000</td><td class="amount">80,000</td><td class="amount">70,000</td></tr>
+                        <tr><td>400～449万円</td><td class="amount">100,000</td><td class="amount">100,000</td><td class="amount">100,000</td></tr>
+                        <tr><td>450～499万円</td><td class="amount">120,000</td><td class="amount">120,000</td><td class="amount">120,000</td></tr>
+                        <tr><td>500～549万円</td><td class="amount">160,000</td><td class="amount">160,000</td><td class="amount">160,000</td></tr>
+                        <tr><td>550万円以上</td><td class="amount">200,000</td><td class="amount">200,000</td><td class="amount">200,000</td></tr>
+                    </table>
+                    <div class="special-note">※所属チームの達成は関係ありません</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">4．チ―ム（自身含めて2人以上）完遂賞</div>
+                    <div class="card-subtitle">主任・係長のチーム長</div>
+                    <table class="condition-table">
+                        <tr><th>達成額</th><th>賞金</th></tr>
+                        <tr><td>500万円未満</td><td class="amount">50,000円</td></tr>
+                        <tr><td>500～550万円</td><td class="amount">80,000円</td></tr>
+                        <tr><td>551～600万円</td><td class="amount">100,000円</td></tr>
+                        <tr><td>601～699万円</td><td class="amount">150,000円</td></tr>
+                        <tr><td>700万円以上</td><td class="amount">200,000円</td></tr>
+                    </table>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">5．グループ（自身含めて5人以上）完遂賞</div>
+                    <div class="card-subtitle">次長</div>
+                    <table class="condition-table">
+                        <tr><th>達成額</th><th>賞金</th></tr>
+                        <tr><td>1,200万円未満</td><td class="amount">50,000円</td></tr>
+                        <tr><td>1,201～1,300万円</td><td class="amount">100,000円</td></tr>
+                        <tr><td>1,301～1,400万</td><td class="amount">150,000円</td></tr>
+                        <tr><td>1,400万円以上</td><td class="amount">200,000円</td></tr>
+                    </table>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">6．営業部達成賞</div>
+                    <div class="card-subtitle">部長</div>
+                    <table class="condition-table">
+                        <tr><th>達成率</th><th>賞金</th></tr>
+                        <tr><td>100～110％達成</td><td class="amount">100,000円</td></tr>
+                        <tr><td>111～120％達成</td><td class="amount">120,000円</td></tr>
+                        <tr><td>121～130％達成</td><td class="amount">150,000円</td></tr>
+                        <tr><td>130％以上</td><td class="amount">200,000円</td></tr>
+                    </table>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">7．大型契約獲得賞</div>
+                    <div class="card-subtitle">（半期ごとの支給）</div>
+                    <table class="condition-table">
+                        <tr><th>条件</th><th>賞金</th></tr>
+                        <tr><td>2024年12月1日～2025年5月31までに計上した総額が売上万1,000万円未満で、契約額が売上1,000万円を超えた場合</td><td class="amount">20,000円</td></tr>
+                        <tr><td>上記＋2025年6月1日～2025年11/30までの計上額が1,000万円を超え尚且つ120％を超えた場合</td><td class="amount">30,000円</td></tr>
+                        <tr><td>上記＋2025年6月1日～2025年11/30までの計上額が1,000万円を超え尚且つ130％を超えた場合</td><td class="amount">50,000円</td></tr>
+                    </table>
+                    <div class="special-note">※本賞金は営業利益500万円いっても倍にはなりません。</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">8．ゴールデンタイム契約獲得賞</div>
+                    <div class="special-note">
+                        契約月計上後、翌月末までに追加契約を頂いたら下記の賞金を支給<br>
+                        <span class="amount">・10,000円</span><br><br>
+                        ※本賞金は営業利益500万円いっても倍にはなりません。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- クリエイティブ部門 -->
+        <div id="creative" class="department">
+            <h2>🎨 クリエイティブ</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">9．JKコンテンツ賞</div>
+                    <div class="card-subtitle">【課長未満】</div>
+                    
+                    <div class="point-table">
+                        <h4>ポイント基準表</h4>
+                        <table class="condition-table">
+                            <tr><th>ランク</th><th>制作コンテンツ</th><th>ポイント</th><th>最低本数（月）</th><th>ポイント合計（月）</th></tr>
+                            <tr><td>S</td><td>オリジナル</td><td>5</td><td>5</td><td>25</td></tr>
+                            <tr><td>A</td><td>編集記事</td><td>2</td><td>10</td><td>20</td></tr>
+                            <tr><td>B</td><td>EVENT CALENDAR<br>japankuru news</td><td>1</td><td>20</td><td>20</td></tr>
+                            <tr><td>W</td><td>多言語化</td><td>2</td><td>5</td><td>10</td></tr>
+                            <tr><td>-</td><td>取材ポイント</td><td>3</td><td>5</td><td>15</td></tr>
+                        </table>
+                        <div style="text-align: center; margin-top: 10px; font-weight: bold; color: #212529;">合計：100P</div>
+                    </div>
+
+                    <h4>賞金基準</h4>
+                    <table class="condition-table">
+                        <tr><th>ポイント</th><th>一般社員</th><th>主任</th><th>係長</th></tr>
+                        <tr><td>100P～109P</td><td class="amount">10,000</td><td>-</td><td>-</td></tr>
+                        <tr><td>110P～119P</td><td class="amount">20,000</td><td class="amount">10,000</td><td>-</td></tr>
+                        <tr><td>120P～129P</td><td class="amount">30,000</td><td class="amount">20,000</td><td class="amount">10,000</td></tr>
+                        <tr><td>130P～149P</td><td class="amount">40,000</td><td class="amount">30,000</td><td class="amount">20,000</td></tr>
+                        <tr><td>150P以上</td><td class="amount">50,000</td><td class="amount">40,000</td><td class="amount">30,000</td></tr>
+                    </table>
+
+                    <div class="special-note">
+                        ※複合OGPV15万（タイは10万）を達成した場合は倍の支給<br>
+                        ※.comのOGPV15万（タイは10万）を達成した場合は5倍の支給<br>
+                        ※営業利益500万の対象外
+                    </div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">10．JAPANKURU賞</div>
+                    <div class="card-subtitle">【課長以上】</div>
+                    <table class="condition-table">
+                        <tr><th>全体PV</th><th>賞金</th></tr>
+                        <tr><td>全体350万ＰＶ以上</td><td class="amount">50,000円</td></tr>
+                        <tr><td>全体500万ＰＶ以上</td><td class="amount">70,000円</td></tr>
+                        <tr><td>全体750万ＰＶ以上</td><td class="amount">100,000円</td></tr>
+                        <tr><td>全体1,000万ＰＶ以上</td><td class="amount">150,000円</td></tr>
+                    </table>
+                    <div class="special-note">
+                        ※営業利益目標対象外<br>
+                        ※JAPANKURUの月別目標を達成したら200％支給
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- メディア管理部門 -->
+        <div id="media" class="department">
+            <h2>📺 メディア管理</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">11．月間粗利益完遂賞</div>
+                    <div class="card-subtitle">（メディア管理・営業企画）／係長以下</div>
+                    <table class="condition-table">
+                        <tr><th>達成P</th><th>係長以下</th></tr>
+                        <tr><td>119万P未満</td><td class="amount">2,000円</td></tr>
+                        <tr><td>120～149万P</td><td class="amount">3,000円</td></tr>
+                        <tr><td>150～174万P</td><td class="amount">5,000円</td></tr>
+                        <tr><td>175～199万P</td><td class="amount">7,000円</td></tr>
+                        <tr><td>200～249万P</td><td class="amount">10,000円</td></tr>
+                        <tr><td>250～299万P</td><td class="amount">20,000円</td></tr>
+                        <tr><td>300～349万P</td><td class="amount">35,000円</td></tr>
+                        <tr><td>350～399万P</td><td class="amount">50,000円</td></tr>
+                        <tr><td>400～449万P</td><td class="amount">75,000円</td></tr>
+                        <tr><td>450万P以上</td><td class="amount">100,000円</td></tr>
+                    </table>
+                    <div class="special-note">チーム粗利目標を達成し、尚且つ個人基準目標を達成したものの達成額に応じ支給する。</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">12．チーム完遂賞</div>
+                    <div class="card-subtitle">高・白</div>
+                    <table class="condition-table">
+                        <tr><th>達成P</th><th>白</th><th>高</th></tr>
+                        <tr><td>314.5万～345.9万P</td><td class="amount">30,000</td><td>-</td></tr>
+                        <tr><td>346.6万～399万</td><td class="amount">50,000</td><td class="amount">50,000</td></tr>
+                        <tr><td>400万～449万</td><td class="amount">100,000</td><td class="amount">100,000</td></tr>
+                        <tr><td>450万～499万P</td><td class="amount">120,000</td><td class="amount">120,000</td></tr>
+                        <tr><td>500万P以上</td><td class="amount">150,000</td><td class="amount">150,000</td></tr>
+                    </table>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">13．グループ完遂賞</div>
+                    <div class="card-subtitle">蔡</div>
+                    <table class="condition-table">
+                        <tr><th>達成P</th><th>賞金</th></tr>
+                        <tr><td>1,192.5万～1,199万P</td><td class="amount">50,000円</td></tr>
+                        <tr><td>1,200万～1,299万P</td><td class="amount">80,000円</td></tr>
+                        <tr><td>1,300万～1,399万P</td><td class="amount">120,000円</td></tr>
+                        <tr><td>1,400万P以上</td><td class="amount">150,000円</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- マーケティング部門 -->
+        <div id="marketing" class="department">
+            <h2>📊 マーケティング</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">14．ポイント達成賞</div>
+                    <div class="card-subtitle">李、陳</div>
+                    <table class="condition-table">
+                        <tr><th>ポイント</th><th>一般社員</th><th>主任</th></tr>
+                        <tr><td>900,000P</td><td class="amount">10,000</td><td>-</td></tr>
+                        <tr><td>1,100,000P</td><td class="amount">20,000</td><td class="amount">10,000</td></tr>
+                        <tr><td>1,300,000P</td><td class="amount">50,000</td><td class="amount">40,000</td></tr>
+                        <tr><td>1,500,000P</td><td class="amount">75,000</td><td class="amount">60,000</td></tr>
+                        <tr><td>2,000,000P</td><td class="amount">100,000</td><td class="amount">85,000</td></tr>
+                    </table>
+                    <div class="special-note">
+                        課長以上の成約／10万P､課長未満の成約／30万P､報告書からの成約／30万P
+                    </div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">15.目標数字達成賞</div>
+                    <div class="card-subtitle">元、洪</div>
+                    <table class="condition-table">
+                        <tr><th>チーム利益目標</th><th>賞金</th></tr>
+                        <tr><td>170～199万円</td><td class="amount">20,000円</td></tr>
+                        <tr><td>200～249万円</td><td class="amount">30,000円</td></tr>
+                        <tr><td>250～299万円</td><td class="amount">50,000円</td></tr>
+                        <tr><td>300～349万円</td><td class="amount">75,000円</td></tr>
+                        <tr><td>350万円以上</td><td class="amount">100,000円</td></tr>
+                    </table>
+                    <div class="special-note">チームの利益目標を達成した場合、2人に以下の賞金を１人ずつに支給する。</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">16．営業アシスト賞</div>
+                    <div class="card-subtitle">元、洪</div>
+                    <table class="condition-table">
+                        <tr><th>粗利</th><th>賞金</th></tr>
+                        <tr><td>粗利50万円未満</td><td class="amount">2,500円</td></tr>
+                        <tr><td>粗利51～100万円</td><td class="amount">5,000円</td></tr>
+                        <tr><td>粗利101～150万円</td><td class="amount">10,000円</td></tr>
+                        <tr><td>粗利151～200万円</td><td class="amount">15,000円</td></tr>
+                        <tr><td>粗利201万円以上</td><td class="amount">20,000円</td></tr>
+                    </table>
+                    <div class="special-note">営業からの依頼以外で、主体的に活動し契約に至った場合、担当者に以下を支給</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">17．ポイントチーム達成賞</div>
+                    <div class="card-subtitle">小池</div>
+                    <table class="condition-table">
+                        <tr><th>ポイント</th><th>賞金</th></tr>
+                        <tr><td>4,700,000P</td><td class="amount">50,000円</td></tr>
+                        <tr><td>～5,500,000P</td><td class="amount">75,000円</td></tr>
+                        <tr><td>～6,000,000P</td><td class="amount">100,000円</td></tr>
+                        <tr><td>～6,500,000P</td><td class="amount">150,000円</td></tr>
+                        <tr><td>6,500,001P以上</td><td class="amount">200,000円</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPC部門 -->
+        <div id="spc" class="department">
+            <h2>🔧 SPC</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">18.営業責任者目標達成賞</div>
+                    <div class="card-subtitle">営業4グループの本目標を達成することで以下の賞金を支給</div>
+                    <table class="condition-table">
+                        <tr><th>達成率</th><th>主任</th><th>係長</th></tr>
+                        <tr><td>達成率120％</td><td class="amount">5,000</td><td>-</td></tr>
+                        <tr><td>達成率130％</td><td class="amount">10,000</td><td class="amount">5,000</td></tr>
+                        <tr><td>達成率140％</td><td class="amount">20,000</td><td class="amount">10,000</td></tr>
+                        <tr><td>達成率150％</td><td class="amount">30,000</td><td class="amount">25,000</td></tr>
+                        <tr><td>達成率160％</td><td class="amount">40,000</td><td class="amount">40,000</td></tr>
+                        <tr><td>達成率170％</td><td class="amount">50,000</td><td class="amount">50,000</td></tr>
+                    </table>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">19.間接営業獲得賞</div>
+                    <div class="card-subtitle">メルマガ・原稿確認時・取材同行時、クライアントとのやり取りでメディアを提案し、獲得に至った場合、以下の賞金を支給する</div>
+                    <table class="condition-table">
+                        <tr><th>粗利</th><th>賞金</th></tr>
+                        <tr><td>粗利50万円未満</td><td class="amount">2,500円</td></tr>
+                        <tr><td>粗利51～100万円</td><td class="amount">5,000円</td></tr>
+                        <tr><td>粗利101～150万円</td><td class="amount">10,000円</td></tr>
+                        <tr><td>粗利151～200万円</td><td class="amount">15,000円</td></tr>
+                        <tr><td>粗利201万円以上</td><td class="amount">20,000円</td></tr>
+                    </table>
+                    <div class="special-note">※メルマガで新規獲得の場合　+2,500円支給</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 広報・経理部門 -->
+        <div id="pr" class="department">
+            <h2>📢 広報・藤田・経理</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">20.メルマガ会員増加賞（藤田）</div>
+                    <div class="card-subtitle">※sansanタグ登録促進</div>
+                    <table class="condition-table">
+                        <tr><th>月間会員数増加</th><th>賞金</th></tr>
+                        <tr><td>100人</td><td class="amount">2,000円</td></tr>
+                        <tr><td>150人</td><td class="amount">5,000円</td></tr>
+                        <tr><td>200人</td><td class="amount">10,000円</td></tr>
+                        <tr><td>250人以上</td><td class="amount">20,000円</td></tr>
+                    </table>
+                    <div class="special-note">開封率30％をキープしつつ、月間で以下の会員数増をすると以下の賞金を支給</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">21.月間有効問い合わせ賞</div>
+                    <div class="card-subtitle">（ジュリ・藤田）</div>
+                    <table class="condition-table">
+                        <tr><th>有効問い合わせ件数</th><th>賞金</th></tr>
+                        <tr><td>10件</td><td class="amount">10,000円</td></tr>
+                        <tr><td>15件</td><td class="amount">15,000円</td></tr>
+                        <tr><td>20件以上</td><td class="amount">20,000円</td></tr>
+                    </table>
+                    <div class="special-note">以下の有効問い合わせが来ることで、2人に下記を支給　※折半</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">22.事例アップ賞</div>
+                    <table class="condition-table">
+                        <tr><th>アップ件数</th><th>賞金</th></tr>
+                        <tr><td>2件のアップ</td><td class="amount">5,000円</td></tr>
+                        <tr><td>4件のアップ</td><td class="amount">15,000円</td></tr>
+                    </table>
+                    <div class="special-note">クライアントと交渉し、事例をHPなどで掲載する許可を取れた場合、以下の賞金を支給</div>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">23.月間メディア露出賞（ジュリ）</div>
+                    
+                    <div class="point-table">
+                        <h4>ポイント基準</h4>
+                        <table class="condition-table">
+                            <tr><th>内容</th><th>ポイント</th></tr>
+                            <tr><td>全国テレビ／全国ラジオ（番組出演・インタビュー含む）</td><td>5P</td></tr>
+                            <tr><td>全国紙新聞（朝刊１面・大見出し）／NHK地域総合など高影響力ＴＶ番組</td><td>4P</td></tr>
+                            <tr><td>全国紙新聞（概ね1面以外）／地方主要紙１面／大手オンラインニュースサイト</td><td>3P</td></tr>
+                            <tr><td>地方紙・業界紙／専門誌（紙・Web）／中堅オンライン媒体</td><td>2P</td></tr>
+                            <tr><td>Web記事中のシンプル引用（社名・リンクのみ）／ブログ記事</td><td>1P</td></tr>
+                        </table>
+                    </div>
+
+                    <h4>賞金基準</h4>
+                    <table class="condition-table">
+                        <tr><th>ポイント</th><th>賞金</th></tr>
+                        <tr><td>5P</td><td class="amount">5,000円</td></tr>
+                        <tr><td>8P</td><td class="amount">10,000円</td></tr>
+                        <tr><td>10P</td><td class="amount">30,000円</td></tr>
+                        <tr><td>15P</td><td class="amount">50,000円</td></tr>
+                    </table>
+                </div>
+
+                <div class="incentive-card">
+                    <div class="card-title">24.助成金取得賞（大河原）</div>
+                    <div class="special-note">
+                        経理主導で取得した助成金の粗利分、10％を賞金として支給<br>
+                        ※上限30万円
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 特別賞 -->
+        <div id="special" class="department">
+            <h2>⭐ 当月達成者特別賞</h2>
+            <div class="incentive-grid">
+                <div class="incentive-card">
+                    <div class="card-title">25．営業利益1,000万円を超えた場合</div>
+                    <div class="card-subtitle">目標達成者に別途支給</div>
+                    <div class="rank-grid">
+                        <div class="rank-item">
+                            <div class="rank-label">一般社員</div>
+                            <div class="rank-value amount">30,000円</div>
+                        </div>
+                        <div class="rank-item">
+                            <div class="rank-label">責任者</div>
+                            <div class="rank-value amount">50,000円</div>
+                        </div>
+                    </div>
+                    <div class="special-note">
+                        ※こちらは上限とは関係ありません<br>
+                        ※役員は除く
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDepartment(dept) {
+            // 全ての部門を非表示
+            const departments = document.querySelectorAll('.department');
+            departments.forEach(d => d.classList.remove('active'));
+            
+            // 全てのタブを非アクティブ
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            // 選択された部門を表示
+            document.getElementById(dept).classList.add('active');
+            
+            // 選択されたタブをアクティブ
+            event.target.classList.add('active');
+        }
+
+        // ページ読み込み時のアニメーション効果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.incentive-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
