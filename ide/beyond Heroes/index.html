@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLD プレゼンテーション - 掛け算の組織へ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1d1d1f;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 1400px;
+            height: 90vh;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 80px;
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -50%) translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .slide-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Title Slide */
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+        }
+
+        .company-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 48px;
+            color: #000;
+        }
+
+        .main-title {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 48px;
+        }
+
+        .presenter-info {
+            font-size: 20px;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        .date-info {
+            font-size: 16px;
+            opacity: 0.5;
+            margin-top: 12px;
+        }
+
+        /* Content Slide Styles */
+        .slide-header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            color: #86868b;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1d1d1f;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .slide-subtitle {
+            font-size: 24px;
+            color: #86868b;
+            margin-top: 12px;
+            font-weight: 400;
+        }
+
+        /* Slide 1 - Problem */
+        .problem-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            height: 100%;
+            align-items: center;
+        }
+
+        .visual-story {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .story-card {
+            background: #f5f5f7;
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .story-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .story-number {
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            background: #ff3b30;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .story-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #1d1d1f;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffcc00 0%, #ff9500 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        .pyramid-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .pyramid {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .pyramid-level {
+            height: 80px;
+            margin: 4px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pyramid-level:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .level-1 {
+            background: linear-gradient(135deg, #ff3b30, #ff6259);
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        .level-2 {
+            background: linear-gradient(135deg, #ff9500, #ffb143);
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .level-3 {
+            background: linear-gradient(135deg, #ffcc00, #ffd74a);
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .level-4 {
+            background: linear-gradient(135deg, #c7c7cc, #d1d1d6);
+            width: 100%;
+        }
+
+        .pyramid-label {
+            position: absolute;
+            right: -160px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: #1d1d1f;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .crisis-message {
+            background: linear-gradient(135deg, #ff3b30, #ff6259);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 16px;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Slide 2 - Current State */
+        .current-state-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            height: 100%;
+            align-items: center;
+        }
+
+        .chart-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .donut-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .chart-legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f5f5f7;
+            border-radius: 8px;
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+        }
+
+        .legend-text {
+            font-size: 14px;
+            color: #1d1d1f;
+        }
+
+        .legend-value {
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .insights-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .insight-card {
+            background: #f5f5f7;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid #ff3b30;
+            transition: all 0.3s;
+        }
+
+        .insight-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .insight-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .insight-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1d1d1f;
+        }
+
+        /* Slide 3 - Enhanced Solution with Two Pillars */
+        .solution-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            height: 100%;
+        }
+
+        .two-pillars-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .vision-statement {
+            text-align: center;
+            padding: 24px;
+            background: linear-gradient(135deg, #007aff, #0051d5);
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .vision-text {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .vision-formula {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            flex: 1;
+        }
+
+        .pillar-card {
+            background: white;
+            border: 2px solid #e5e5e7;
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pillar-1 {
+            border-top: 6px solid #ff9500;
+        }
+
+        .pillar-2 {
+            border-top: 6px solid #34c759;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+
+        .pillar-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+
+        .pillar-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #86868b;
+            margin-bottom: 8px;
+        }
+
+        .pillar-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .pillar-frequency {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #007aff, #0051d5);
+            color: white;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .pillar-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .pillar-point {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f5f5f7;
+            border-radius: 8px;
+        }
+
+        .point-icon {
+            font-size: 20px;
+        }
+
+        .point-text {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .point-text strong {
+            color: #007aff;
+            font-weight: 700;
+        }
+
+        .department-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .dept-item {
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .flow-arrow {
+            color: #ff9500;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .seminar-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-icon {
+            font-size: 32px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .flow-connector {
+            font-size: 24px;
+            color: #34c759;
+            font-weight: 700;
+        }
+
+        .kpi-section {
+            padding: 16px;
+            background: linear-gradient(135deg, #f5f5f7, #edf2f7);
+            border-radius: 12px;
+        }
+
+        .kpi-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #86868b;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .kpi-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .kpi-tag {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #e5e5e7;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .implementation-vision {
+            padding: 20px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            border-left: 4px solid #007aff;
+        }
+
+        .vision-role {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .role-icon {
+            font-size: 32px;
+        }
+
+        .role-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1d1d1f;
+        }
+
+        /* Slide 4 - Impact */
+        .impact-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .transformation-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+        }
+
+        .before-after {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .state-box {
+            width: 200px;
+            height: 200px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .state-before {
+            background: #f5f5f7;
+            border: 2px solid #d1d1d6;
+        }
+
+        .state-after {
+            background: linear-gradient(135deg, #34c759, #30d158);
+            color: white;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(52, 199, 89, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(52, 199, 89, 0.6); }
+        }
+
+        .state-formula {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .state-label {
+            font-size: 14px;
+            margin-top: 12px;
+            opacity: 0.8;
+        }
+
+        .arrow-transform {
+            font-size: 48px;
+            color: #007aff;
+            animation: slide-arrow 2s infinite;
+        }
+
+        @keyframes slide-arrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .benefit-item {
+            background: white;
+            border: 1px solid #e5e5e7;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+            border-color: #007aff;
+        }
+
+        .benefit-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .benefit-metric {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007aff;
+        }
+
+        /* Ending Slide */
+        .ending-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #007aff 0%, #0051d5 100%);
+            color: white;
+        }
+
+        .ending-message {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            letter-spacing: -2px;
+        }
+
+        .ending-subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 48px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #007aff;
+            padding: 20px 48px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(255,255,255,0.3);
+        }
+
+        .ending-logo {
+            position: absolute;
+            bottom: 60px;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 32px;
+            color: #007aff;
+        }
+
+        /* Timer */
+        .timer {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1001;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007aff, #0051d5);
+            width: 0;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Timer -->
+        <div class="timer" id="timer">0:00</div>
+
+        <!-- Slide 0: Title -->
+        <div class="slide title-slide" id="slide0">
+            <div class="company-logo">
+                <img src="https://your-company-logo-url.com/logo.png" alt="GLD" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='GLD';">
+            </div>
+            <h1 class="main-title">掛け算の組織文化へ</h1>
+            <p class="subtitle">全組織横断で創る新しい成長戦略</p>
+            <div class="presenter-info">営業部長 井出</div>
+            <div class="date-info">2024.12</div>
+        </div>
+
+        <!-- Slide 1: Problem Recognition -->
+        <div class="slide" id="slide1">
+            <div class="slide-header">
+                <div class="slide-number">CHAPTER 01</div>
+                <h2 class="slide-title">なぜ今、変革が必要なのか</h2>
+                <p class="slide-subtitle">見えてきた構造的リスク</p>
+            </div>
+            
+            <div class="problem-layout">
+                <div class="visual-story">
+                    <div class="story-card">
+                        <div class="story-number">1</div>
+                        <div class="story-content">
+                            営業19名の組織で、たった<span class="highlight">2名</span>が
+                            全体目標の<span class="highlight">40-50%</span>を担っています
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-number">2</div>
+                        <div class="story-content">
+                            <span class="highlight">大口1件</span>を失うだけで
+                            組織全体が崩れるリスクを抱えています
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-number">3</div>
+                        <div class="story-content">
+                            しかし、社員の多くは
+                            <span class="highlight">危機感なく</span>日々を過ごしています
+                        </div>
+                    </div>
+                    
+                    <div class="crisis-message">
+                        このままでは持続不可能
+                    </div>
+                </div>
+                
+                <div class="pyramid-visual">
+                    <div class="pyramid">
+                        <div class="pyramid-level level-1">
+                            40-50%
+                            <span class="pyramid-label">部長+役員 2名</span>
+                        </div>
+                        <div class="pyramid-level level-2">
+                            70%
+                            <span class="pyramid-label">課長以上 4名</span>
+                        </div>
+                        <div class="pyramid-level level-3">
+                            90%
+                            <span class="pyramid-label">係長以上 8名</span>
+                        </div>
+                        <div class="pyramid-level level-4">
+                            100%
+                            <span class="pyramid-label">全営業 19名</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current State Analysis -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <div class="slide-number">CHAPTER 02</div>
+                <h2 class="slide-title">現状の構造を可視化する</h2>
+                <p class="slide-subtitle">数字が語る組織の偏り</p>
+            </div>
+            
+            <div class="current-state-layout">
+                <div class="chart-section">
+                    <div class="donut-container">
+                        <svg viewBox="0 0 400 400" style="width: 100%; height: 100%;">
+                            <defs>
+                                <filter id="shadow">
+                                    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.1"/>
+                                </filter>
+                            </defs>
+                            
+                            <!-- Donut segments -->
+                            <path d="M 200 50 A 150 150 0 0 1 350 200 L 280 200 A 80 80 0 0 0 200 120 Z" 
+                                  fill="#ff3b30" filter="url(#shadow)"/>
+                            <path d="M 350 200 A 150 150 0 0 1 200 350 L 200 280 A 80 80 0 0 0 280 200 Z" 
+                                  fill="#ff9500" filter="url(#shadow)"/>
+                            <path d="M 200 350 A 150 150 0 0 1 50 200 L 120 200 A 80 80 0 0 0 200 280 Z" 
+                                  fill="#ffcc00" filter="url(#shadow)"/>
+                            <path d="M 50 200 A 150 150 0 0 1 200 50 L 200 120 A 80 80 0 0 0 120 200 Z" 
+                                  fill="#c7c7cc" filter="url(#shadow)"/>
+                            
+                            <!-- Center circle -->
+                            <circle cx="200" cy="200" r="70" fill="white" filter="url(#shadow)"/>
+                            
+                            <!-- Center text -->
+                            <text x="200" y="190" text-anchor="middle" font-size="24" font-weight="700" fill="#1d1d1f">
+                                営業19名
+                            </text>
+                            <text x="200" y="215" text-anchor="middle" font-size="14" fill="#86868b">
+                                売上構成比
+                            </text>
+                        </svg>
+                    </div>
+                    
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff3b30;"></div>
+                            <span class="legend-text">トップ2名</span>
+                            <span class="legend-value">45%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff9500;"></div>
+                            <span class="legend-text">課長2名</span>
+                            <span class="legend-value">25%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ffcc00;"></div>
+                            <span class="legend-text">係長4名</span>
+                            <span class="legend-value">20%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #c7c7cc;"></div>
+                            <span class="legend-text">その他11名</span>
+                            <span class="legend-value">10%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="insights-section">
+                    <div class="insight-card">
+                        <div class="insight-icon">⚠️</div>
+                        <div class="insight-text">
+                            <strong>過度な集中リスク</strong><br>
+                            上位8名で90%の売上を支える脆弱な構造
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-icon">📉</div>
+                        <div class="insight-text">
+                            <strong>成長の限界</strong><br>
+                            個人の努力だけでは組織の成長に限界がある
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-icon">🎯</div>
+                        <div class="insight-text">
+                            <strong>必要なのは掛け算</strong><br>
+                            1+1=2ではなく、1×1=10の発想転換
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <div class="slide-number">CHAPTER 03</div>
+                <h2 class="slide-title">2つの横断施策で掛け算文化を創る</h2>
+                <p class="slide-subtitle">単独から協創へ、組織の新しい成長エンジン</p>
+            </div>
+            
+            <div class="solution-layout">
+                <div class="two-pillars-container">
+                    <div class="vision-statement">
+                        <div class="vision-text">掛け算の組織文化</div>
+                        <div class="vision-formula">1 × 1 = 10</div>
+                    </div>
+                    
+                    <div class="pillars-grid">
+                        <!-- Pillar 1: 横断企画 -->
+                        <div class="pillar-card pillar-1">
+                            <div class="pillar-header">
+                                <div class="pillar-number">施策 1</div>
+                                <div class="pillar-title">全組織横断企画</div>
+                                <div class="pillar-frequency">月1件 必須化</div>
+                            </div>
+                            
+                            <div class="pillar-content">
+                                <div class="pillar-point">
+                                    <span class="point-icon">🎯</span>
+                                    <span class="point-text"><strong>若手主導</strong>で企画から実行まで</span>
+                                </div>
+                                <div class="pillar-point">
+                                    <span class="point-icon">🔄</span>
+                                    <span class="point-text">全セクション<strong>必須参加</strong></span>
+                                </div>
+                                <div class="pillar-point">
+                                    <span class="point-icon">💡</span>
+                                    <span class="point-text">単一メディアでは<strong>不可能な価値</strong>創出</span>
+                                </div>
+                            </div>
+                            
+                            <div class="department-flow">
+                                <div class="dept-item">営業</div>
+                                <span class="flow-arrow">×</span>
+                                <div class="dept-item">メディア</div>
+                                <span class="flow-arrow">×</span>
+                                <div class="dept-item">マーケ</div>
+                                <span class="flow-arrow">×</span>
+                                <div class="dept-item">自社メディア</div>
+                            </div>
+                            
+                            <div class="kpi-section">
+                                <div class="kpi-title">KPI設定</div>
+                                <div class="kpi-items">
+                                    <span class="kpi-tag">企画実施数</span>
+                                    <span class="kpi-tag">参加部門数</span>
+                                    <span class="kpi-tag">新規案件創出</span>
+                                    <span class="kpi-tag">若手参画率</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pillar 2: セミナー事業 -->
+                        <div class="pillar-card pillar-2">
+                            <div class="pillar-header">
+                                <div class="pillar-number">施策 2</div>
+                                <div class="pillar-title">プル型セミナー事業</div>
+                                <div class="pillar-frequency">月1回 定期開催</div>
+                            </div>
+                            
+                            <div class="pillar-content">
+                                <div class="pillar-point">
+                                    <span class="point-icon">🎓</span>
+                                    <span class="point-text"><strong>社外向け</strong>セミナー開催</span>
+                                </div>
+                                <div class="pillar-point">
+                                    <span class="point-icon">🧲</span>
+                                    <span class="point-text">顧客から<strong>選ばれる</strong>仕組み</span>
+                                </div>
+                                <div class="pillar-point">
+                                    <span class="point-icon">📊</span>
+                                    <span class="point-text">インバウンド<strong>案件獲得</strong></span>
+                                </div>
+                            </div>
+                            
+                            <div class="seminar-flow">
+                                <div class="flow-step">
+                                    <div class="step-icon">📢</div>
+                                    <div class="step-text">集客</div>
+                                </div>
+                                <div class="flow-connector">→</div>
+                                <div class="flow-step">
+                                    <div class="step-icon">🎯</div>
+                                    <div class="step-text">セミナー</div>
+                                </div>
+                                <div class="flow-connector">→</div>
+                                <div class="flow-step">
+                                    <div class="step-icon">🤝</div>
+                                    <div class="step-text">商談</div>
+                                </div>
+                            </div>
+                            
+                            <div class="kpi-section">
+                                <div class="kpi-title">KPI設定</div>
+                                <div class="kpi-items">
+                                    <span class="kpi-tag">開催回数</span>
+                                    <span class="kpi-tag">集客数</span>
+                                    <span class="kpi-tag">商談化率</span>
+                                    <span class="kpi-tag">成約率</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="implementation-vision">
+                    <div class="vision-role">
+                        <div class="role-icon">🚩</div>
+                        <div class="role-text">
+                            <strong>営業部長の役割：</strong>旗振り役として方向性を示し、各セクションを巻き込み、横断を文化として定着させる
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Expected Impact -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <div class="slide-number">CHAPTER 04</div>
+                <h2 class="slide-title">期待される変革インパクト</h2>
+                <p class="slide-subtitle">組織が生まれ変わる4つの効果</p>
+            </div>
+            
+            <div class="impact-layout">
+                <div class="transformation-visual">
+                    <div class="before-after">
+                        <div class="state-box state-before">
+                            <div class="state-formula">1 + 1 = 2</div>
+                            <div class="state-label">現在の組織</div>
+                        </div>
+                        
+                        <div class="arrow-transform">→</div>
+                        
+                        <div class="state-box state-after">
+                            <div class="state-formula">1 × 1 = 10</div>
+                            <div class="state-label">目指す組織</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">👥</div>
+                        <div class="benefit-title">若手の成長</div>
+                        <div class="benefit-metric">12企画/年</div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚖️</div>
+                        <div class="benefit-title">負荷分散</div>
+                        <div class="benefit-metric">-30%</div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <div class="benefit-title">売上拡大</div>
+                        <div class="benefit-metric">+25%</div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🏆</div>
+                        <div class="benefit-title">競争優位</div>
+                        <div class="benefit-metric">独自価値</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Ending -->
+        <div class="slide ending-slide" id="slide5">
+            <h1 class="ending-message">一緒に創る、新しいGLD</h1>
+            <p class="ending-subtitle">横断とプル型営業を両輪に、持続可能な成長へ</p>
+            <button class="cta-button">今すぐ始めよう</button>
+            <div class="ending-logo">GLD</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="previousSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="slide-indicator">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        let startTime = Date.now();
+        let timerInterval;
+
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('slide');
+            const dots = document.getElementsByClassName('dot');
+            
+            // 범위 체크
+            if (n >= totalSlides) {
+                currentSlide = 0;
+            } else if (n < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = n;
+            }
+            
+            // 모든 슬라이드와 인디케이터 비활성화
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            
+            // 현재 슬라이드와 인디케이터 활성화
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.add('active');
+            }
+            if (dots[currentSlide]) {
+                dots[currentSlide].classList.add('active');
+            }
+            
+            updateProgress();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+            if (e.key === 'Escape') {
+                currentSlide = 0;
+                showSlide(0);
+            }
+        });
+
+        // Timer
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // 3分経過時に警告
+            if (elapsed === 170) {
+                document.getElementById('timer').style.background = '#ff3b30';
+            }
+        }
+
+        timerInterval = setInterval(updateTimer, 1000);
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+
+        // Auto-advance timing (optional)
+        // 각 슬라이드별 예상 시간: Title(10s) - Problem(50s) - Current(40s) - Solution(60s) - Impact(40s) - Ending(10s)
+        
+        // Initialize - 페이지 로드 시 첫 번째 슬라이드 확실히 표시
+        window.addEventListener('load', function() {
+            // 모든 슬라이드 초기화
+            const slides = document.getElementsByClassName('slide');
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            // 첫 번째 슬라이드만 표시
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
