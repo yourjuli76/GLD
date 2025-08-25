@@ -118,6 +118,17 @@
             border-radius: 4px;
         }
 
+        /* Title Slide & Ending Slide Specific Chapter Number */
+        .title-slide .slide-number,
+        .ending-slide .slide-number {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+        }
+        .ending-slide .slide-number {
+             color: rgba(255, 255, 255, 0.7);
+        }
+
         /* Title Slide */
         .title-slide {
             display: flex;
@@ -130,17 +141,18 @@
         }
 
         .company-logo {
-            width: 120px;
-            height: 120px;
+            width: 200px;
+            height: auto;
             margin-bottom: 40px;
-            background: white;
-            border-radius: 24px;
+            background: none;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 48px;
-            color: #000;
+        }
+        .company-logo img {
+            width: 100%;
+            height: auto;
         }
 
         .main-title {
@@ -159,15 +171,27 @@
         }
 
         .presenter-info {
-            font-size: 20px;
-            opacity: 0.7;
-            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .presenter-info .role {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .presenter-info .name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .date-info {
             font-size: 16px;
             opacity: 0.5;
-            margin-top: 12px;
+            margin-top: 16px;
         }
 
         /* Content Slide Styles */
@@ -176,7 +200,7 @@
             padding-bottom: 24px;
             border-bottom: 1px solid #e5e5e7;
         }
-
+        
         .slide-number {
             font-size: 14px;
             color: #86868b;
@@ -434,7 +458,8 @@
             display: flex;
             flex-direction: column;
             gap: 32px;
-            height: 100%;
+            flex: 1; /* 수정된 부분 */
+            overflow: hidden; /* 컨텐츠가 넘치는 것을 방지 */
         }
 
         .two-pillars-container {
@@ -872,30 +897,65 @@
             width: 0;
             transition: width 0.3s;
         }
-    </style>
+        /* --- [교체] 슬라이드 3번 레이아웃 최종 조정 --- */
+#slide3 .slide-header {
+    margin-bottom: 32px; /* 헤더와 본문 사이 간격 조정 */
+}
+#slide3 .solution-layout {
+    gap: 24px; /* 본문 내 섹션 간격 조정 */
+}
+#slide3 .pillars-grid {
+    gap: 24px; /* 두 카드 사이 간격 조정 */
+}
+#slide3 .pillar-card {
+    padding: 24px; /* 카드 내부 여백 조정 */
+}
+/* 폰트 크기는 원래대로 유지합니다. */
+  /* --- [추가] 마지막 슬라이드 'Next Step' 스타일 --- */
+.next-step {
+    margin-top: 40px;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    max-width: 700px;
+}
+.next-step-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+.next-step p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+}  </style>
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Progress Bar -->
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
 
-        <!-- Timer -->
         <div class="timer" id="timer">0:00</div>
 
-        <!-- Slide 0: Title -->
         <div class="slide title-slide" id="slide0">
+            <div class="slide-number">CHAPTER 00</div>
             <div class="company-logo">
-                <img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="GLD" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='GLD';">
+                <img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="GLD" style="width: 100%; height: auto;">
             </div>
             <h1 class="main-title">掛け算の組織文化へ</h1>
-            <p class="subtitle">全組織横断で創る新しい成長戦略</p>
-            <div class="presenter-info">グローバル・デイリー営業部 井出悠</div>
+<p class="subtitle">「足し算」組織の限界を超え、持続的な成長を創る</p>
+            <div class="presenter-info">
+                <span class="role">グローバル・デイリー 営業部長</span>
+                <span class="name">井出 悠</span>
+            </div>
             <div class="date-info">2025.9.9</div>
         </div>
 
-        <!-- Slide 1: Problem Recognition -->
         <div class="slide" id="slide1">
             <div class="slide-header">
                 <div class="slide-number">CHAPTER 01</div>
@@ -957,7 +1017,6 @@
             </div>
         </div>
 
-        <!-- Slide 2: Current State Analysis -->
         <div class="slide" id="slide2">
             <div class="slide-header">
                 <div class="slide-number">CHAPTER 02</div>
@@ -975,7 +1034,6 @@
                                 </filter>
                             </defs>
                             
-                            <!-- Donut segments -->
                             <path d="M 200 50 A 150 150 0 0 1 350 200 L 280 200 A 80 80 0 0 0 200 120 Z" 
                                   fill="#ff3b30" filter="url(#shadow)"/>
                             <path d="M 350 200 A 150 150 0 0 1 200 350 L 200 280 A 80 80 0 0 0 280 200 Z" 
@@ -985,10 +1043,8 @@
                             <path d="M 50 200 A 150 150 0 0 1 200 50 L 200 120 A 80 80 0 0 0 120 200 Z" 
                                   fill="#c7c7cc" filter="url(#shadow)"/>
                             
-                            <!-- Center circle -->
                             <circle cx="200" cy="200" r="70" fill="white" filter="url(#shadow)"/>
                             
-                            <!-- Center text -->
                             <text x="200" y="190" text-anchor="middle" font-size="24" font-weight="700" fill="#1d1d1f">
                                 営業19名
                             </text>
@@ -1050,7 +1106,6 @@
             </div>
         </div>
 
-        <!-- Slide 3: Solution -->
         <div class="slide" id="slide3">
             <div class="slide-header">
                 <div class="slide-number">CHAPTER 03</div>
@@ -1066,7 +1121,6 @@
                     </div>
                     
                     <div class="pillars-grid">
-                        <!-- Pillar 1: 横断企画 -->
                         <div class="pillar-card pillar-1">
                             <div class="pillar-header">
                                 <div class="pillar-number">施策 1</div>
@@ -1110,7 +1164,6 @@
                             </div>
                         </div>
                         
-                        <!-- Pillar 2: セミナー事業 -->
                         <div class="pillar-card pillar-2">
                             <div class="pillar-header">
                                 <div class="pillar-number">施策 2</div>
@@ -1167,14 +1220,13 @@
                     <div class="vision-role">
                         <div class="role-icon">🚩</div>
                         <div class="role-text">
-                            <strong>営業部長の役割：</strong>旗振り役として方向性を示し、各セクションを巻き込み、横断を文化として定着させる
+                            <strong>井出の役割：</strong>旗振り役として方向性を示し、各セクションを巻き込み、横断を文化として定着させる
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: Expected Impact -->
         <div class="slide" id="slide4">
             <div class="slide-header">
                 <div class="slide-number">CHAPTER 04</div>
@@ -1227,21 +1279,26 @@
             </div>
         </div>
 
-        <!-- Slide 5: Ending -->
         <div class="slide ending-slide" id="slide5">
-            <h1 class="ending-message">一緒に創る、新しいグローバル・デイリー</h1>
-            <p class="ending-subtitle">横断とプル型営業を両輪に、持続可能な成長へ</p>
-            <button class="cta-button">今すぐ始めよう</button>
-            <div class="ending-logo">GLD</div>
+          <div class="slide-number">CHAPTER 05</div>
+          <h1 class="ending-message">「個」に依存する時代を終え、組織で成長する未来へ</h1>
+<p class="ending-subtitle">掛け算の文化こそが、私たちの新しいスタンダードです。</p>
+          
+          <div class="next-step">
+              <div class="next-step-title">NEXT STEP</div>
+              <p>来週中に各部門長と連携し、タスクフォースの設立を提案します。</p>
+          </div>
+  
+            <div class="company-logo">
+              <img src="https://www.gldaily.com/gld-kanri/wp-content/themes/gldaily/assets/images/logo.png" alt="GLD" style="width: 100%; height: auto;">
+          </div>
         </div>
 
-        <!-- Navigation -->
         <div class="nav-buttons">
             <button class="nav-btn" onclick="previousSlide()">←</button>
             <button class="nav-btn" onclick="nextSlide()">→</button>
         </div>
 
-        <!-- Slide Indicators -->
         <div class="slide-indicator">
             <div class="dot active"></div>
             <div class="dot"></div>
@@ -1267,7 +1324,6 @@
             const slides = document.getElementsByClassName('slide');
             const dots = document.getElementsByClassName('dot');
             
-            // 범위 체크
             if (n >= totalSlides) {
                 currentSlide = 0;
             } else if (n < 0) {
@@ -1276,7 +1332,6 @@
                 currentSlide = n;
             }
             
-            // 모든 슬라이드와 인디케이터 비활성화
             for (let i = 0; i < slides.length; i++) {
                 slides[i].classList.remove('active');
             }
@@ -1285,7 +1340,6 @@
                 dots[i].classList.remove('active');
             }
             
-            // 현재 슬라이드와 인디케이터 활성화
             if (slides[currentSlide]) {
                 slides[currentSlide].classList.add('active');
             }
@@ -1304,7 +1358,6 @@
             showSlide(currentSlide - 1);
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
@@ -1320,14 +1373,12 @@
             }
         });
 
-        // Timer
         function updateTimer() {
             const elapsed = Math.floor((Date.now() - startTime) / 1000);
             const minutes = Math.floor(elapsed / 60);
             const seconds = elapsed % 60;
             document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
             
-            // 3分経過時に警告
             if (elapsed === 170) {
                 document.getElementById('timer').style.background = '#ff3b30';
             }
@@ -1335,7 +1386,6 @@
 
         timerInterval = setInterval(updateTimer, 1000);
 
-        // Touch support
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -1353,17 +1403,11 @@
             if (touchEndX > touchStartX + 50) previousSlide();
         }
 
-        // Auto-advance timing (optional)
-        // 각 슬라이드별 예상 시간: Title(10s) - Problem(50s) - Current(40s) - Solution(60s) - Impact(40s) - Ending(10s)
-        
-        // Initialize - 페이지 로드 시 첫 번째 슬라이드 확실히 표시
         window.addEventListener('load', function() {
-            // 모든 슬라이드 초기화
             const slides = document.getElementsByClassName('slide');
             for (let i = 0; i < slides.length; i++) {
                 slides[i].classList.remove('active');
             }
-            // 첫 번째 슬라이드만 표시
             showSlide(0);
         });
     </script>
