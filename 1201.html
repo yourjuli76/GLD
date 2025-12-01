@@ -1,176 +1,412 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PR部門 2025振り返りと2026目標</title>
   <style>
+    /* 基本設定 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Arial', 'Hiragino Sans', sans-serif; background: #333; padding: 20px; }
-    .slide { width: 960px; height: 540px; margin: 20px auto; background: #0D1B2A; position: relative; overflow: hidden; }
+    body { 
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; 
+      background: #000; 
+      overflow: hidden; 
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* スライド共通スタイル */
+    .slide { 
+      width: 100%; 
+      height: 100%; 
+      background: #0D1B2A; 
+      position: absolute; 
+      top: 0; left: 0;
+      opacity: 0;           /* デフォルトは透明 */
+      pointer-events: none; /* クリック無効 */
+      z-index: 0;
+      transition: opacity 0.4s ease; /* ふわっと切り替わるアニメーション */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* アクティブなスライド */
+    .slide.active { 
+      opacity: 1;           /* 不透明にする */
+      pointer-events: auto; /* クリック有効 */
+      z-index: 10;          /* 最前面へ */
+    }
+
+    /* レイアウト用クラス */
     .col { display: flex; flex-direction: column; }
     .row { display: flex; flex-direction: row; align-items: center; }
     .center { justify-content: center; align-items: center; }
     .fill-height { flex: 1; }
     .fit { flex: none; }
+    
+    /* ナビゲーション表示 */
+    .nav-hint {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      color: #6B7D8F;
+      font-size: 14px;
+      z-index: 1000;
+      pointer-events: none;
+      user-select: none;
+    }
+    .page-indicator {
+      position: fixed;
+      bottom: 20px;
+      left: 30px;
+      color: #D4AF37;
+      font-size: 16px;
+      z-index: 1000;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* 文字などの調整 */
+    h1, p { cursor: default; }
   </style>
 </head>
 <body>
 
-<!-- SLIDE 1: タイトル -->
-<div class="slide col center">
+<div class="page-indicator"><span id="currentPage">1</span> / <span id="totalPages">7</span></div>
+<div class="nav-hint">← → キー または 画面左右クリックで移動</div>
+
+<div class="slide active col center" data-slide="1">
   <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
+  
   <div style="position: absolute; top: 30px; right: 40px; background: rgba(212, 175, 55, 0.2); border: 2px solid #D4AF37; padding: 10px 24px; border-radius: 4px;">
     <p style="font-size: 18px; color: #D4AF37; font-weight: 600;">2025年度 振り返り</p>
   </div>
-  <div class="col center" style="gap: 24px;">
-    <p style="font-size: 18px; color: #D4AF37; letter-spacing: 4px; font-weight: 600;">2025 SLOGAN</p>
-    <div style="width: 80px; height: 3px; background: #D4AF37;"></div>
-    <h1 style="font-size: 52px; color: #FFFFFF; font-weight: 700; text-align: center; line-height: 1.3;">広報基盤の構築と</h1>
-    <h1 style="font-size: 52px; color: #FFFFFF; font-weight: 700; text-align: center; line-height: 1.3;">リード獲得体制の確立</h1>
-    <div style="width: 80px; height: 3px; background: #D4AF37;"></div>
-    <p style="font-size: 20px; color: #B8C5D3; margin-top: 10px;">PR部門 年間報告</p>
+  
+  <div class="col center" style="gap: 30px;">
+    <p style="font-size: 20px; color: #6B7D8F; letter-spacing: 6px;">GLOBAL DAILY</p>
+    <h1 style="font-size: 64px; color: #FFFFFF; font-weight: 700; text-align: center;">PR部門</h1>
+    <h1 style="font-size: 52px; color: #D4AF37; font-weight: 700; text-align: center;">年間報告</h1>
+    <div style="width: 120px; height: 4px; background: #D4AF37; margin: 10px 0;"></div>
+    <p style="font-size: 28px; color: #B8C5D3;">2025年振り返りと2026年目標</p>
   </div>
 </div>
 
-<!-- SLIDE 2: 現状 -->
-<div class="slide col">
+<div class="slide col center" data-slide="2">
   <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
-  <div style="width: 900px; margin: 0 30px; padding-top: 28px;" class="fit">
-    <div class="row" style="gap: 12px;">
-      <div style="width: 5px; height: 32px; background: #D4AF37;"></div>
-      <h1 style="font-size: 30px; color: #FFFFFF; font-weight: 700;">広報の現状：担当業務範囲</h1>
-    </div>
-  </div>
-  <div class="fill-height row" style="padding: 12px 30px; gap: 12px;">
-    <div class="col" style="flex: 1;">
-      <div style="background: #1B4D7A; border-radius: 8px; padding: 12px; height: 100%;">
-        <p style="font-size: 14px; color: #D4AF37; margin-bottom: 8px; font-weight: 700;">広報・PR</p>
-        <div class="col" style="gap: 4px;">
-          <p style="font-size: 13px; color: #FFFFFF;">HP制作・保守</p>
-          <p style="font-size: 13px; color: #FFFFFF;">コンテンツ制作・配信</p>
-          <p style="font-size: 13px; color: #FFFFFF;">プレスリリース</p>
-          <p style="font-size: 13px; color: #FFFFFF;">成功事例原稿</p>
-          <p style="font-size: 13px; color: #FFFFFF;">社外向けPR資料</p>
-        </div>
-      </div>
-    </div>
-    <div class="col" style="flex: 1;">
-      <div style="background: #1B4D7A; border-radius: 8px; padding: 12px; height: 100%;">
-        <p style="font-size: 14px; color: #D4AF37; margin-bottom: 8px; font-weight: 700;">テクニカルサポート</p>
-        <div class="col" style="gap: 4px;">
-          <p style="font-size: 13px; color: #FFFFFF;">オウンドメディア保守</p>
-          <p style="font-size: 13px; color: #FFFFFF;">LP制作</p>
-          <p style="font-size: 13px; color: #FFFFFF;">GA4分析・設定</p>
-          <p style="font-size: 13px; color: #FFFFFF;">Google広告運用</p>
-          <p style="font-size: 13px; color: #FFFFFF;">各種ツール管理</p>
-        </div>
-      </div>
-    </div>
-    <div class="col" style="flex: 1;">
-      <div style="background: #1B3A5A; border-radius: 8px; padding: 12px; height: 100%;">
-        <p style="font-size: 14px; color: #B8C5D3; margin-bottom: 8px; font-weight: 700;">人事サポート</p>
-        <div class="col" style="gap: 4px;">
-          <p style="font-size: 13px; color: #B8C5D3;">採用説明会</p>
-          <p style="font-size: 13px; color: #B8C5D3;">採用関連資料作成</p>
-          <p style="font-size: 13px; color: #B8C5D3;">会社紹介資料</p>
-        </div>
-      </div>
-    </div>
-    <div class="col" style="flex: 1;">
-      <div style="background: #1B3A5A; border-radius: 8px; padding: 12px; height: 100%;">
-        <p style="font-size: 14px; color: #B8C5D3; margin-bottom: 8px; font-weight: 700;">その他</p>
-        <div class="col" style="gap: 4px;">
-          <p style="font-size: 13px; color: #B8C5D3;">セミナー企画・運営</p>
-          <p style="font-size: 13px; color: #B8C5D3;">各種資料作成</p>
-          <p style="font-size: 13px; color: #B8C5D3;">突発的プロジェクト</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="padding: 0 30px 38px 30px;">
-    <div style="background: rgba(212, 175, 55, 0.2); border-left: 4px solid #D4AF37; padding: 14px 18px; border-radius: 0 8px 8px 0;">
-      <p style="font-size: 20px; color: #D4AF37; font-weight: 600;">テクニカルサポート業務の比重が大きく、戦略的広報活動に時間を割けない</p>
+  
+  <div class="col center" style="gap: 40px;">
+    <p style="font-size: 56px; color: #FFFFFF; font-weight: 700;">会社の言葉は、<span style="color: #D4AF37;">数字</span></p>
+    
+    <div style="width: 120px; height: 4px; background: #D4AF37;"></div>
+    
+    <p style="font-size: 40px; color: #B8C5D3; font-weight: 500;">その数字を強くするのは</p>
+    <p style="font-size: 56px; color: #FFFFFF; font-weight: 700;"><span style="color: #D4AF37;">信頼</span>と<span style="color: #D4AF37;">認知</span></p>
+    
+    <div style="margin-top: 40px; background: rgba(212, 175, 55, 0.15); border: 2px solid #D4AF37; padding: 20px 50px; border-radius: 8px;">
+      <p style="font-size: 28px; color: #D4AF37; font-weight: 600;">これがグローバル・デイリー広報の使命</p>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 3: 2025年結果 -->
-<div class="slide col">
+<div class="slide col" data-slide="3">
   <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
-  <div style="width: 920px; margin: 0 20px; padding-top: 28px;" class="fit">
+  
+  <div style="width: calc(100% - 60px); margin: 0 30px; padding-top: 28px;" class="fit">
     <div class="row" style="gap: 12px;">
-      <div style="width: 5px; height: 36px; background: #D4AF37;"></div>
-      <h1 style="font-size: 36px; color: #FFFFFF; font-weight: 700;">2025年の結果</h1>
+      <div style="width: 5px; height: 40px; background: #D4AF37;"></div>
+      <h1 style="font-size: 40px; color: #FFFFFF; font-weight: 700;">2025年の目標</h1>
     </div>
   </div>
-  <div class="fill-height row center" style="padding: 20px 40px 40px 40px; gap: 28px;">
-    <div style="background: #1B3A5A; border-radius: 12px; padding: 28px; flex: 1; text-align: center;">
-      <p style="font-size: 18px; color: #B8C5D3; margin-bottom: 12px; letter-spacing: 1px;">有効問い合わせ</p>
-      <p style="font-size: 80px; color: #FFFFFF; font-weight: 700; line-height: 1;">50</p>
-      <p style="font-size: 24px; color: #B8C5D3; margin-top: 8px;">件/年</p>
+  
+  <div class="fill-height col center" style="padding: 20px 60px; gap: 30px;">
+    
+    <div style="text-align: center; background: #1B3A5A; padding: 24px 60px; border-radius: 12px;">
+      <p style="font-size: 14px; color: #D4AF37; margin-bottom: 10px; letter-spacing: 3px;">SLOGAN</p>
+      <p style="font-size: 36px; color: #FFFFFF; font-weight: 700;">社外認知度の向上 / プル型組織の確立</p>
     </div>
-    <div style="background: #1B4D7A; border-radius: 12px; padding: 28px; flex: 1; text-align: center;">
-      <p style="font-size: 18px; color: #B8C5D3; margin-bottom: 12px; letter-spacing: 1px;">成約数</p>
-      <p style="font-size: 80px; color: #FFFFFF; font-weight: 700; line-height: 1;">5</p>
-      <p style="font-size: 24px; color: #B8C5D3; margin-top: 8px;">件</p>
-    </div>
-    <div style="background: rgba(212, 175, 55, 0.15); border: 3px solid #D4AF37; border-radius: 12px; padding: 28px; flex: 1; text-align: center;">
-      <p style="font-size: 18px; color: #D4AF37; margin-bottom: 12px; letter-spacing: 1px;">成約率</p>
-      <p style="font-size: 80px; color: #D4AF37; font-weight: 700; line-height: 1;">10</p>
-      <p style="font-size: 24px; color: #D4AF37; margin-top: 8px;">%</p>
+    
+    <div class="row center" style="gap: 40px; width: 100%;">
+      <div style="background: #1B4D7A; border-radius: 12px; padding: 30px; flex: 1; text-align: center;">
+        <p style="font-size: 18px; color: #B8C5D3; margin-bottom: 10px;">月間有効問い合わせ</p>
+        <p style="font-size: 72px; color: #D4AF37; font-weight: 700; line-height: 1;">10<span style="font-size: 28px;">件</span></p>
+        <p style="font-size: 20px; color: #6B7D8F; margin-top: 8px;">（年間120件）</p>
+      </div>
+      <div style="background: #1B4D7A; border-radius: 12px; padding: 30px; flex: 1; text-align: center;">
+        <p style="font-size: 18px; color: #B8C5D3; margin-bottom: 10px;">メルマガ会員</p>
+        <p style="font-size: 72px; color: #FFFFFF; font-weight: 700; line-height: 1;">増加</p>
+      </div>
+      <div style="background: #1B4D7A; border-radius: 12px; padding: 30px; flex: 1; text-align: center;">
+        <p style="font-size: 18px; color: #B8C5D3; margin-bottom: 10px;">メディア露出</p>
+        <p style="font-size: 72px; color: #FFFFFF; font-weight: 700; line-height: 1;">拡大</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 4: 2026年目標 -->
-<div class="slide col">
+<div class="slide col" data-slide="4">
   <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
-  <div style="width: 900px; margin: 0 30px; padding-top: 24px;" class="fit">
+  
+  <div style="width: calc(100% - 60px); margin: 0 30px; padding-top: 28px;" class="fit">
     <div class="row" style="gap: 12px;">
-      <div style="width: 5px; height: 32px; background: #D4AF37;"></div>
-      <h1 style="font-size: 32px; color: #FFFFFF; font-weight: 700;">2026年 目指す姿</h1>
+      <div style="width: 5px; height: 40px; background: #D4AF37;"></div>
+      <h1 style="font-size: 40px; color: #FFFFFF; font-weight: 700;">2025年の施策</h1>
     </div>
   </div>
-  <div class="fill-height col center" style="padding: 0 40px; gap: 20px;">
+  
+  <div class="fill-height col center" style="padding: 20px 60px; gap: 24px;">
+    
+    <div class="row" style="gap: 24px; width: 100%;">
+      <div style="background: #1B4D7A; border-radius: 12px; padding: 24px; flex: 1;">
+        <p style="font-size: 20px; color: #D4AF37; margin-bottom: 16px; font-weight: 700;">📈 リード獲得</p>
+        <div class="col" style="gap: 10px;">
+          <p style="font-size: 22px; color: #FFFFFF;">HP制作・改善</p>
+          <p style="font-size: 22px; color: #FFFFFF;">サービスページ整備</p>
+          <p style="font-size: 22px; color: #FFFFFF;">LP・バナー制作</p>
+          <p style="font-size: 22px; color: #FFFFFF;">Google広告運用</p>
+        </div>
+      </div>
+      
+      <div style="background: #1B4D7A; border-radius: 12px; padding: 24px; flex: 1;">
+        <p style="font-size: 20px; color: #D4AF37; margin-bottom: 16px; font-weight: 700;">📣 認知拡大</p>
+        <div class="col" style="gap: 10px;">
+          <p style="font-size: 22px; color: #FFFFFF;">メールマガジン配信</p>
+          <p style="font-size: 22px; color: #FFFFFF;">コンテンツ制作</p>
+          <p style="font-size: 22px; color: #FFFFFF;">セミナー企画・運営</p>
+          <p style="font-size: 22px; color: #FFFFFF;">プレスリリース</p>
+        </div>
+      </div>
+      
+      <div style="background: #1B3A5A; border-radius: 12px; padding: 24px; flex: 1;">
+        <p style="font-size: 20px; color: #B8C5D3; margin-bottom: 16px; font-weight: 700;">🔧 基盤構築</p>
+        <div class="col" style="gap: 10px;">
+          <p style="font-size: 22px; color: #B8C5D3;">GA4分析体制</p>
+          <p style="font-size: 22px; color: #B8C5D3;">問い合わせフロー整備</p>
+          <p style="font-size: 22px; color: #B8C5D3;">オウンドメディア保守</p>
+          <p style="font-size: 22px; color: #B8C5D3;">各種ツール管理</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="slide col" data-slide="5">
+  <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
+  
+  <div style="width: calc(100% - 60px); margin: 0 30px; padding-top: 28px;" class="fit">
+    <div class="row" style="gap: 12px;">
+      <div style="width: 5px; height: 40px; background: #D4AF37;"></div>
+      <h1 style="font-size: 40px; color: #FFFFFF; font-weight: 700;">2025年の結果</h1>
+    </div>
+  </div>
+  
+  <div class="fill-height col center" style="padding: 20px 60px; gap: 30px;">
+    
+    <div class="row center" style="gap: 20px; width: 100%;">
+      <div style="background: #1B3A5A; border-radius: 12px; padding: 20px; text-align: center; width: 200px;">
+        <p style="font-size: 16px; color: #6B7D8F; margin-bottom: 6px;">目標</p>
+        <p style="font-size: 32px; color: #6B7D8F; font-weight: 700;">120件/年</p>
+      </div>
+      <p style="font-size: 48px; color: #D4AF37;">→</p>
+      <div style="background: #1B4D7A; border-radius: 12px; padding: 20px; text-align: center; width: 200px;">
+        <p style="font-size: 16px; color: #B8C5D3; margin-bottom: 6px;">結果</p>
+        <p style="font-size: 32px; color: #FFFFFF; font-weight: 700;">50件/年</p>
+      </div>
+      <p style="font-size: 32px; color: #B8C5D3; margin-left: 20px;">達成率 42%</p>
+    </div>
+    
+    <div class="row center" style="gap: 40px; width: 100%;">
+      <div style="background: #1B3A5A; border-radius: 16px; padding: 36px; flex: 1; text-align: center;">
+        <p style="font-size: 20px; color: #B8C5D3; margin-bottom: 12px;">有効問い合わせ</p>
+        <p style="font-size: 100px; color: #FFFFFF; font-weight: 700; line-height: 1;">50</p>
+        <p style="font-size: 24px; color: #B8C5D3; margin-top: 8px;">件/年</p>
+      </div>
+      <div style="background: #1B4D7A; border-radius: 16px; padding: 36px; flex: 1; text-align: center;">
+        <p style="font-size: 20px; color: #B8C5D3; margin-bottom: 12px;">成約数</p>
+        <p style="font-size: 100px; color: #FFFFFF; font-weight: 700; line-height: 1;">5</p>
+        <p style="font-size: 24px; color: #B8C5D3; margin-top: 8px;">件</p>
+      </div>
+      <div style="background: rgba(212, 175, 55, 0.15); border: 3px solid #D4AF37; border-radius: 16px; padding: 36px; flex: 1; text-align: center;">
+        <p style="font-size: 20px; color: #D4AF37; margin-bottom: 12px;">成約率</p>
+        <p style="font-size: 100px; color: #D4AF37; font-weight: 700; line-height: 1;">10</p>
+        <p style="font-size: 24px; color: #D4AF37; margin-top: 8px;">%</p>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="slide col" data-slide="6">
+  <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
+  
+  <div style="width: calc(100% - 60px); margin: 0 30px; padding-top: 28px;" class="fit">
+    <div class="row" style="gap: 12px;">
+      <div style="width: 5px; height: 40px; background: #D4AF37;"></div>
+      <h1 style="font-size: 40px; color: #FFFFFF; font-weight: 700;">課題と改善点</h1>
+    </div>
+  </div>
+  
+  <div class="fill-height col center" style="padding: 20px 80px; gap: 30px;">
+    
+    <div class="row" style="gap: 40px; width: 100%;">
+      
+      <div style="flex: 1;">
+        <div style="background: rgba(220, 80, 80, 0.15); border: 2px solid #DC5050; border-radius: 12px; padding: 28px;">
+          <p style="font-size: 22px; color: #DC5050; margin-bottom: 20px; font-weight: 700;">❌ 課題</p>
+          <div class="col" style="gap: 16px;">
+            <p style="font-size: 24px; color: #FFFFFF;">• 目標達成率 42%（未達）</p>
+            <p style="font-size: 24px; color: #FFFFFF;">• 成約率 10%（業界平均20%以下）</p>
+            <p style="font-size: 24px; color: #FFFFFF;">• テクニカル業務に時間を取られ<br>　 戦略的活動が不足</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="flex: 1;">
+        <div style="background: rgba(80, 180, 120, 0.15); border: 2px solid #50B478; border-radius: 12px; padding: 28px;">
+          <p style="font-size: 22px; color: #50B478; margin-bottom: 20px; font-weight: 700;">✓ 改善ポイント</p>
+          <div class="col" style="gap: 16px;">
+            <p style="font-size: 24px; color: #FFFFFF;">• ブランディング活動の強化</p>
+            <p style="font-size: 24px; color: #FFFFFF;">• メディア露出の拡大</p>
+            <p style="font-size: 24px; color: #FFFFFF;">• 問い合わせの質向上<br>　 （ターゲット精度UP）</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div style="background: rgba(212, 175, 55, 0.2); border-left: 4px solid #D4AF37; padding: 18px 24px; border-radius: 0 8px 8px 0; width: 100%;">
+      <p style="font-size: 24px; color: #D4AF37; font-weight: 600;">→ 2026年は「攻めの広報」へシフトが必要</p>
+    </div>
+    
+  </div>
+</div>
+
+<div class="slide col" data-slide="7">
+  <div style="position: absolute; top: 0; left: 0; width: 10px; height: 100%; background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);"></div>
+  
+  <div style="width: calc(100% - 60px); margin: 0 30px; padding-top: 24px;" class="fit">
+    <div class="row" style="gap: 12px;">
+      <div style="width: 5px; height: 40px; background: #D4AF37;"></div>
+      <h1 style="font-size: 40px; color: #FFFFFF; font-weight: 700;">2026年の目標</h1>
+    </div>
+  </div>
+  
+  <div class="fill-height col center" style="padding: 0 50px; gap: 24px;">
+    
     <div style="text-align: center;">
-      <p style="font-size: 36px; color: #D4AF37; font-weight: 700;">「市場での存在感を高め、選ばれる会社へ」</p>
+      <p style="font-size: 48px; color: #D4AF37; font-weight: 700;">「市場での存在感を高め、選ばれる会社へ」</p>
     </div>
-    <div class="row center" style="gap: 16px; width: 100%;">
-      <div style="background: #1B4D7A; border-radius: 8px; padding: 14px; flex: 1; text-align: center;">
-        <p style="font-size: 11px; color: #B8C5D3; margin-bottom: 4px;">STEP 1</p>
-        <p style="font-size: 17px; color: #FFFFFF; font-weight: 600;">ブランディング強化</p>
-        <p style="font-size: 17px; color: #FFFFFF; font-weight: 600;">メディア露出</p>
+    
+    <div class="row center" style="gap: 20px; width: 100%;">
+      <div style="background: #1B4D7A; border-radius: 10px; padding: 18px; flex: 1; text-align: center;">
+        <p style="font-size: 14px; color: #B8C5D3; margin-bottom: 6px;">STEP 1</p>
+        <p style="font-size: 22px; color: #FFFFFF; font-weight: 600;">ブランディング強化</p>
+        <p style="font-size: 22px; color: #FFFFFF; font-weight: 600;">メディア露出</p>
       </div>
-      <p style="font-size: 28px; color: #D4AF37;">→</p>
-      <div style="background: #1B4D7A; border-radius: 8px; padding: 14px; flex: 1; text-align: center;">
-        <p style="font-size: 11px; color: #B8C5D3; margin-bottom: 4px;">STEP 2</p>
-        <p style="font-size: 17px; color: #FFFFFF; font-weight: 600;">問い合わせ増加</p>
-        <p style="font-size: 17px; color: #FFFFFF; font-weight: 600;">成約率向上</p>
+      <p style="font-size: 36px; color: #D4AF37;">→</p>
+      <div style="background: #1B4D7A; border-radius: 10px; padding: 18px; flex: 1; text-align: center;">
+        <p style="font-size: 14px; color: #B8C5D3; margin-bottom: 6px;">STEP 2</p>
+        <p style="font-size: 22px; color: #FFFFFF; font-weight: 600;">問い合わせ増加</p>
+        <p style="font-size: 22px; color: #FFFFFF; font-weight: 600;">成約率向上</p>
       </div>
-      <p style="font-size: 28px; color: #D4AF37;">→</p>
-      <div style="background: rgba(212, 175, 55, 0.25); border: 2px solid #D4AF37; border-radius: 8px; padding: 14px; flex: 1; text-align: center;">
-        <p style="font-size: 11px; color: #D4AF37; margin-bottom: 4px;">GOAL</p>
-        <p style="font-size: 17px; color: #D4AF37; font-weight: 700;">事業拡大</p>
-        <p style="font-size: 17px; color: #D4AF37; font-weight: 700;">新事業展開可能性</p>
-      </div>
-    </div>
-    <div class="row center" style="gap: 20px; width: 100%; margin-top: 8px;">
-      <div style="background: #1B3A5A; border-radius: 8px; padding: 16px; flex: 1; text-align: center;">
-        <p style="font-size: 12px; color: #6B7D8F; margin-bottom: 6px;">問い合わせ</p>
-        <p style="font-size: 28px; color: #FFFFFF; font-weight: 700;">50 → 100件</p>
-      </div>
-      <div style="background: #1B3A5A; border-radius: 8px; padding: 16px; flex: 1; text-align: center;">
-        <p style="font-size: 12px; color: #6B7D8F; margin-bottom: 6px;">成約率</p>
-        <p style="font-size: 28px; color: #FFFFFF; font-weight: 700;">10% → 20%</p>
-      </div>
-      <div style="background: #1B3A5A; border-radius: 8px; padding: 16px; flex: 1; text-align: center;">
-        <p style="font-size: 12px; color: #6B7D8F; margin-bottom: 6px;">成約数</p>
-        <p style="font-size: 28px; color: #FFFFFF; font-weight: 700;">5件 → 20件</p>
+      <p style="font-size: 36px; color: #D4AF37;">→</p>
+      <div style="background: rgba(212, 175, 55, 0.25); border: 3px solid #D4AF37; border-radius: 10px; padding: 18px; flex: 1; text-align: center;">
+        <p style="font-size: 14px; color: #D4AF37; margin-bottom: 6px;">GOAL</p>
+        <p style="font-size: 22px; color: #D4AF37; font-weight: 700;">事業拡大</p>
+        <p style="font-size: 22px; color: #D4AF37; font-weight: 700;">新事業展開可能性</p>
       </div>
     </div>
-    <p style="font-size: 16px; color: #B8C5D3;">広報活動を通じて、さらなる会社の数字を強くしていく</p>
+    
+    <div class="row center" style="gap: 24px; width: 100%;">
+      <div style="background: #1B3A5A; border-radius: 10px; padding: 20px; flex: 1; text-align: center;">
+        <p style="font-size: 16px; color: #6B7D8F; margin-bottom: 8px;">問い合わせ</p>
+        <p style="font-size: 40px; color: #FFFFFF; font-weight: 700;">50 → <span style="color: #D4AF37;">100件</span></p>
+      </div>
+      <div style="background: #1B3A5A; border-radius: 10px; padding: 20px; flex: 1; text-align: center;">
+        <p style="font-size: 16px; color: #6B7D8F; margin-bottom: 8px;">成約率</p>
+        <p style="font-size: 40px; color: #FFFFFF; font-weight: 700;">10% → <span style="color: #D4AF37;">20%</span></p>
+      </div>
+      <div style="background: #1B3A5A; border-radius: 10px; padding: 20px; flex: 1; text-align: center;">
+        <p style="font-size: 16px; color: #6B7D8F; margin-bottom: 8px;">成約数</p>
+        <p style="font-size: 40px; color: #FFFFFF; font-weight: 700;">5件 → <span style="color: #D4AF37;">20件</span></p>
+      </div>
+    </div>
+    
+    <p style="font-size: 24px; color: #B8C5D3; margin-top: 8px;">広報活動を通じて、さらなる会社の数字を強くしていく</p>
+    
   </div>
 </div>
+
+<script>
+// DOMが完全に読み込まれてから実行する
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // 要素の取得
+  var slides = document.querySelectorAll('.slide');
+  var currentPageEl = document.getElementById('currentPage');
+  var totalPagesEl = document.getElementById('totalPages');
+  
+  // スライドがない場合はエラー回避
+  if (slides.length === 0) return;
+
+  var currentSlide = 0;
+  var totalSlides = slides.length;
+  
+  // 総ページ数の表示更新
+  totalPagesEl.textContent = totalSlides;
+  
+  // スライド表示関数
+  function showSlide(index) {
+    // 全スライドからactiveを外す
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.remove('active');
+    }
+    // 指定のスライドにactiveをつける
+    slides[index].classList.add('active');
+    
+    // ページ番号更新
+    currentPageEl.textContent = index + 1;
+  }
+
+  // 次へ
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  // 前へ
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  // キーボード操作設定
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prevSlide();
+    }
+  });
+
+  // クリック操作設定（画面の右半分なら進む、左なら戻る）
+  document.addEventListener('click', function(e) {
+    var x = e.clientX;
+    var width = window.innerWidth;
+    
+    if (x > width / 2) {
+      nextSlide();
+    } else {
+      prevSlide();
+    }
+  });
+  
+  // 初期表示（最初のスライドを表示）
+  showSlide(0);
+});
+</script>
 
 </body>
 </html>
