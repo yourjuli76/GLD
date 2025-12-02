@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>在日ベトナム人の日本製品・ギフト需要に関する実態調査（イメージ）</title>
+  <style>
+    /* === Base === */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", "Meiryo", sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background-color: #f5f5f5;
+    }
+
+    a {
+      color: #0074c8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* === Layout === */
+    .page-wrap {
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      border-radius: 4px;
+    }
+
+    .news-meta {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    /* === Headings === */
+    .news-article h1 {
+      font-size: 26px;
+      line-height: 1.5;
+      margin: 0 0 10px;
+      padding-top: 24px;
+    }
+
+    .news-article h2 {
+      font-size: 20px;
+      margin: 32px 0 12px;
+      padding-left: 10px;
+      border-left: 4px solid #0074c8;
+    }
+
+    .news-article h3 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      padding-left: 8px;
+      border-left: 3px solid #999;
+    }
+
+    .news-article h4 {
+      font-size: 16px;
+      margin: 22px 0 8px;
+      padding-left: 8px;
+      border-left: 3px solid #ccc;
+    }
+
+    /* === Text / blocks === */
+    .lead {
+      font-size: 15px;
+      margin: 16px 0 18px;
+    }
+
+    .note-dummy {
+      font-size: 12px;
+      color: #c00;
+      background: #fff4f4;
+      padding: 8px 10px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+
+    .news-article p {
+      margin: 8px 0 12px;
+      font-size: 15px;
+    }
+
+    .news-article ul {
+      margin: 6px 0 16px 20px;
+      padding: 0;
+    }
+
+    .news-article li {
+      margin-bottom: 6px;
+    }
+
+    .summary-list {
+      list-style: disc;
+      margin-left: 20px;
+      background: #fafafa;
+      border: 1px solid #eee;
+      padding: 10px 14px;
+      border-radius: 3px;
+    }
+
+    blockquote {
+      margin: 14px 0 18px;
+      padding: 10px 14px;
+      border-left: 4px solid #e0e0e0;
+      background-color: #fafafa;
+      font-size: 14px;
+    }
+
+    blockquote ul {
+      margin: 6px 0 0 18px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #d9534f;
+    }
+
+    .insight-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      background: #0074c8;
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-bottom: 4px;
+    }
+
+    /* === Table-like list for 調査概要 === */
+    .survey-summary {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 20px;
+      border: 1px solid #eee;
+      border-radius: 3px;
+      background: #fafafa;
+    }
+
+    .survey-summary li {
+      border-bottom: 1px solid #eee;
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+
+    .survey-summary li:last-child {
+      border-bottom: none;
+    }
+
+    .survey-label {
+      display: inline-block;
+      min-width: 120px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* === Service section === */
+    .service-section {
+      border-top: 1px solid #eee;
+      padding-top: 18px;
+      margin-top: 26px;
+      font-size: 14px;
+    }
+
+    .service-section ul {
+      margin-left: 18px;
+    }
+
+    /* Responsive-ish */
+    @media (max-width: 600px) {
+      .page-wrap {
+        margin: 20px auto;
+        padding: 0 12px 40px;
+        border-radius: 0;
+      }
+
+      .news-article h1 {
+        font-size: 22px;
+      }
+
+      .news-article h2 {
+        font-size: 18px;
+      }
+    }
+        /* === Simple chart (bar) === */
+        .chart-block {
+      margin: 14px 0 22px;
+      padding: 10px 14px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      background: #fafafa;
+      font-size: 13px;
+    }
+
+    .chart-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .chart-note {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .chart-row {
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+    }
+
+    .chart-label {
+      flex: 0 0 170px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .chart-bar-wrap {
+      flex: 1;
+      background: #e9eef4;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-right: 6px;
+      height: 14px;
+    }
+
+    .chart-bar {
+      height: 100%;
+      background: #0074c8; /* 필요하면 사이트 컬러에 맞게 조정 */
+      border-radius: 20px;
+    }
+
+    .chart-value {
+      flex: 0 0 40px;
+      text-align: right;
+      font-size: 12px;
+      color: #333;
+    }
+      /* === Insight cards infographic === */
+      .insight-infographic {
+      margin: 18px 0 26px;
+      padding: 14px 16px 18px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      background: #f9fbff;
+    }
+
+    .insight-infographic-title {
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .insight-infographic-sub {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 12px;
+    }
+
+    .insight-card-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .insight-card {
+      flex: 1 1 260px;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid #e0e7f5;
+      padding: 10px 12px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .insight-card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .insight-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0074c8;
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+    }
+
+    .insight-card-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .insight-chip {
+      display: inline-block;
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      margin-left: 6px;
+      color: #fff;
+      background: #e67e22; /* default (High) */
+    }
+
+    .chip-high {
+      background: #e67e22;
+    }
+
+    .chip-mid {
+      background: #3498db;
+    }
+
+    .chip-low {
+      background: #7f8c8d;
+    }
+
+    .insight-stat {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .insight-stat strong {
+      font-size: 16px;
+      margin-right: 4px;
+    }
+
+    .insight-points {
+      list-style: disc;
+      margin: 4px 0 0 18px;
+      padding: 0;
+      font-size: 12px;
+      color: #555;
+    }
+
+    @media (max-width: 600px) {
+      .insight-card-wrap {
+        flex-direction: column;
+      }
+      .insight-card {
+        flex: 1 1 auto;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <article class="news-article">
+
+    <div class="news-meta">
+      <span class="meta-date">2025年12月2日</span>
+      &nbsp;|&nbsp;
+      <span class="meta-cat">Global Daily </span>
+    </div>
+
+    <!-- タイトル -->
+    <h1>在日ベトナム人に聞いた「日本製品のリアル利用実態」と「テトに贈りたい日本ギフト」（結果イメージ）</h1>
+
+    <div class="note-dummy">
+      ※本記事の数値・グラフは、実際の調査結果を想定したイメージです。<br>
+      実査後の正式な結果とは異なる可能性があります。
+    </div>
+
+    <!-- リード文 -->
+    <p class="lead">
+      株式会社グローバル・デイリー（本社所在地：東京都台東区、代表取締役：石川 和則）は、日本在住のベトナム人を対象に「在日ベトナム人の日本製品の利用実態と、家族や友人に贈りたい日本ギフト」に関する調査を行いました。
+    </p>
+    <p>
+      在日ベトナム人は、日本で日常的に日本製品やサービスを利用する生活者であると同時に、ベトナムに住む家族や友人に日本の魅力を伝えるインフルエンサーのような存在です。本調査では、彼らが日本でどのような商品カテゴリーを購入し、テト（旧正月）や長期休暇のシーズンにどのような日本製品を「おみやげ」やギフトとして選びたいと考えているのか、さらに日本製品のパッケージ表示や情報提供、プロモーションに対するニーズを明らかにしました。
+    </p>
+    <p>
+      本調査は、在留外国人向けマーケティングソリューション
+      「<a href="https://korekoko.jp" target="_blank" rel="noopener">korekoko（コレココ）</a>」を運営する株式会社グローバル・デイリーと、
+      在留ベトナム人ネットワークを有するパートナー企業・株式会社シュパーブが共同で実施した
+      「在日ベトナム人ソリューション」の一環として行いました。
+    </p>
+
+    <!-- 調査結果サマリー -->
+    <h2>調査結果サマリー（イメージ）</h2>
+    <ul class="summary-list">
+      <li>
+        <strong>約7割が「日用品」と「化粧品・スキンケア」を日本で頻繁に購入</strong><br>
+        在日ベトナム人の <span class="highlight">69％</span> が「日用品（洗剤・シャンプーなど）」、
+        <span class="highlight">63％</span> が「化粧品・スキンケア」を「この1年でよく買った日本製品カテゴリー」と回答。
+      </li>
+      <li>
+        <strong>テトに家族へ贈りたい日本製品は「スナック・お菓子」と「健康食品・サプリ」が2トップ</strong><br>
+        「テトや長期休暇シーズンに家族・友人に持ち帰りたい日本製品」として、
+        <span class="highlight">スナック・お菓子（58％）</span>、
+        <span class="highlight">健康食品・サプリメント（47％）</span>、
+        <span class="highlight">化粧品・スキンケア（44％）</span>が上位に。
+      </li>
+      <li>
+        <strong>パッケージの「日本語だらけ」が最大のハードル。約6割が情報不足を指摘</strong><br>
+        日本製品購入時の不便点として、
+        <span class="highlight">61％</span> が「日本語だけがたくさん書いてあり、内容が分かりにくい」と回答。
+      </li>
+      <li>
+        <strong>メーカーに期待されるのは「多言語ラベル」と「ベトナム人目線の商品設計」</strong><br>
+        改善・強化してほしい点として、<span class="highlight">52％</span> が「ベトナム語／英語の分かりやすいラベル」、
+        <span class="highlight">41％</span> が「ベトナム人の好みに合う味・香り・デザイン」を挙げました。
+      </li>
+    </ul>
+
+    <!-- 調査結果詳細 -->
+    <h2>主な調査結果（想定インサイト）</h2>
+
+    <!-- 1. 利用実態とブランド選択 -->
+    <h3>1. 日本製品の利用実態とブランド選択</h3>
+
+    <h4>① 日用品と化粧品が“日本ブランドの主戦場”、即席麺は「ベトナム／他国ブランド派」が4割</h4>
+    <p>
+      「この1年間で日本でよく購入した商品カテゴリー」（複数回答）では、
+      <strong>日用品（69％）</strong>、「化粧品・スキンケア（63％）」、
+      「インスタント食品・スナック・飲料（54％）」が上位を占めました。
+      一方、ベトナムにいた頃に使っていた日本製品のカテゴリーでは、
+      「ラーメン・インスタント食品」「スナック・お菓子」が目立ち、
+      日本の食品ブランドはすでにベトナムで一定の認知・信頼を獲得していることがうかがえます。
+    </p>
+    <p>
+      しかし、「現在、日本に住んでいても、あえて日本ブランドではなく他国ブランドを選ぶカテゴリー」を尋ねると、
+      <strong>「ラーメン・インスタント食品（42％）」</strong>、「飲料（31％）」でベトナム／他国ブランド志向が強く、
+      日用品・スキンケアでは日本ブランドが優位という、カテゴリーごとの“明暗”が浮き彫りになりました。
+    </p>
+
+    <blockquote>
+      <div class="insight-label">Insight ①</div><br>
+      「日本ブランドが強い領域」と「まだ取り戻せていない領域」がくっきり
+      <ul>
+        <li>日用品・化粧品は、「安全性・品質」「日本製への信頼」を理由に日本ブランドが選ばれやすい。</li>
+        <li>インスタント食品・飲料は、味のなじみや価格、ベトナムブランドへの愛着から「母国ブランド回帰」が起きやすい。</li>
+        <li>どのカテゴリーなら日本ブランドで勝負できるかを見極め、重点投資を行うことが重要。</li>
+      </ul>
+    </blockquote>
+    <div class="chart-block">
+      <div class="chart-title">この1年間で「日本でよく購入した商品カテゴリー」（上位抜粋・イメージ）</div>
+      <div class="chart-note">※複数回答／％はダミー値です</div>
+
+      <div class="chart-row">
+        <div class="chart-label">日用品（洗剤・シャンプーなど）</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 69%;"></div>
+        </div>
+        <div class="chart-value">69％</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label">化粧品・スキンケア</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 63%;"></div>
+        </div>
+        <div class="chart-value">63％</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label">インスタント食品・スナック・飲料</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 54%;"></div>
+        </div>
+        <div class="chart-value">54％</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label">電子機器・家電</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 32%;"></div>
+        </div>
+        <div class="chart-value">32％</div>
+      </div>
+    </div>
+
+    <!-- 2. テト・ギフトニーズ -->
+    <h3>2. テト・長期休暇シーズンの日本ギフトニーズ</h3>
+
+    <h4>② テトに贈りたいのは「おいしさ」＋「健康」＋「日本らしさ」がそろった商品</h4>
+    <p>
+      「テトや長期休暇シーズンに、ベトナムの家族・友人に贈ったり持ち帰ったりしたい日本製品」（複数回答）では、
+      <strong>スナック・お菓子（58％）</strong>、
+      <strong>お茶・コーヒー・飲料（36％）</strong>、
+      <strong>健康食品・サプリメント（47％）</strong>、
+      <strong>化粧品・スキンケア（44％）</strong>が上位となりました。
+    </p>
+    <p>
+      贈り物選びで重視するポイントとしては、
+      <strong>「日本らしさが伝わること（47％）」</strong>、
+      <strong>「品質・性能が良いこと（45％）」</strong>、
+      <strong>「家族や友人の好みに合いそうなこと（38％）」</strong>が挙がり、
+      価格単独よりも「ストーリー性」「安心感」「相手へのフィット感」が重視されていることが分かりました。
+    </p>
+
+    <blockquote>
+      <div class="insight-label">Insight ②</div><br>
+      テト向け日本ギフトは「日本らしさ × 健康・美容 × 持ち帰りやすさ」がカギ
+      <ul>
+        <li>お菓子・スナック単体よりも、<strong>お茶＋スナック＋小さな雑貨</strong>などの「組み合わせギフト」が支持される可能性。</li>
+        <li>健康食品・サプリ、スキンケアは、ベトナム本国での入手しづらさも相まって「特別感のあるギフト」として期待値が高い。</li>
+        <li>テト・休暇シーズン向けに、「軽くて割れにくい」「箱ごと配りやすい」パッケージ設計が重要。</li>
+      </ul>
+    </blockquote>
+    <div class="chart-block">
+      <div class="chart-title">テトに「家族・友人に贈りたい日本製品」（上位抜粋・イメージ）</div>
+      <div class="chart-note">※複数回答／％はダミー値です</div>
+
+      <div class="chart-row">
+        <div class="chart-label">スナック・お菓子</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 58%;"></div>
+        </div>
+        <div class="chart-value">58％</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label">健康食品・サプリメント</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 47%;"></div>
+        </div>
+        <div class="chart-value">47％</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label">化粧品・スキンケア</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width: 44%;"></div>
+        </div>
+        <div class="chart-value">44％</div>
+      </div>
+    </div>
+
+    <!-- 3. パッケージ・情報・プロモーション -->
+    <h3>3. 日本製品のパッケージ・情報提供・プロモーションに関するニーズ</h3>
+
+    <h4>③ 6割が「日本語表示の壁」を実感。求められるのは“多言語ラベル”と“ベトナム目線の情報設計”</h4>
+    <p>
+      日本製品を購入する際の不便点（複数回答）では、
+      <strong>「日本語だけがたくさん書いてあり、内容が分かりにくい」が61％</strong>と最多。
+      「賞味期限／消費期限・保管方法が見つけにくい（38％）」「アレルギー・成分情報が分かりにくい（32％）」も上位となりました。
+    </p>
+    <p>
+      また、「今後、外国人や海外の生活者に向けて改善・強化してほしい点」（単一回答）では、
+      <strong>ベトナム語／英語の分かりやすいラベル（52％）</strong>、
+      <strong>ベトナム人の好みに合う味・香り・デザインの商品設計（41％）</strong>、
+      <strong>ベトナム人向けの公式情報・レビューの充実（28％）</strong>が上位に挙がりました。
+    </p>
+    <p>
+      プロモーションについては、「ベトナム語のYouTuber／TikTokerとのコラボ（46％）」「Facebook／InstagramでのSNS広告（43％）」「在日ベトナム人コミュニティとのイベント（32％）」が効果的だと考えられています。
+    </p>
+
+    <blockquote>
+      <div class="insight-label">Insight ③</div><br>
+      「パッケージを読む前に離脱させない」ための3つのポイント
+      <ul>
+        <li><strong>多言語ミニラベル：</strong>安全性・成分・使い方・注意点だけでも、ベトナム語／英語で補足する。</li>
+        <li><strong>賞味期限・保管の一目化：</strong>アイコンやピクトグラムで直感的に理解できるデザインに。</li>
+        <li><strong>コミュニティ連動プロモーション：</strong>在日ベトナム人インフルエンサーやコミュニティを通じた「実際の使い方紹介」が、店頭パッケージの“読み替え”役を担う。</li>
+      </ul>
+    </blockquote>
+    <div class="insight-infographic">
+      <div class="insight-infographic-title">在日ベトナム人から見た、日本メーカーへの「優先アクション」まとめ（イメージ）</div>
+      <div class="insight-infographic-sub">
+        ※数値はダミーです。実査結果に合わせて更新してください。
+      </div>
+
+      <div class="insight-card-wrap">
+
+        <!-- Card 1: 多言語ラベル -->
+        <div class="insight-card">
+          <div class="insight-card-header">
+            <div class="insight-icon">1</div>
+            <div class="insight-card-title">
+              多言語ラベル・表示設計
+              <span class="insight-chip chip-high">最優先</span>
+            </div>
+          </div>
+          <div class="insight-stat">
+            <strong>52％</strong>が「ベトナム語／英語での分かりやすいラベル」を
+            <br>外国人向けに<strong>最も強化してほしいポイント</strong>と回答
+          </div>
+          <ul class="insight-points">
+            <li>日本語情報は多い一方、「安全性・成分・使い方」が伝わりにくいという声が多数。</li>
+            <li>最低限のポイントだけでも、多言語ミニラベルやQRコード連動で補完する余地。</li>
+            <li>テトギフトとして家族に説明する際にも、「何の製品か説明しやすいこと」が重要。</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: ベトナム人目線の商品設計 -->
+        <div class="insight-card">
+          <div class="insight-card-header">
+            <div class="insight-icon">2</div>
+            <div class="insight-card-title">
+              ベトナム人の好みに合う商品設計
+              <span class="insight-chip chip-mid">重要</span>
+            </div>
+          </div>
+          <div class="insight-stat">
+            <strong>41％</strong>が「味・香り・デザインなどをベトナム人の好みに近づけてほしい」と回答
+          </div>
+          <ul class="insight-points">
+            <li>日用品・スキンケアは日本ブランドが強い一方、即席麺・飲料は「母国ブランド回帰」が目立つ。</li>
+            <li>味や香りの「強さ」「甘さ」「辛さ」など、ベトナム人にとっての“ちょうどいい”ゾーンの把握がカギ。</li>
+            <li>在日ベトナム人を起点にした小規模テストや試食会で、ベトナム市場への展開を見据えた開発も可能。</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: コミュニティ×デジタルでのプロモーション -->
+        <div class="insight-card">
+          <div class="insight-card-header">
+            <div class="insight-icon">3</div>
+            <div class="insight-card-title">
+              コミュニティ連動のプロモーション
+              <span class="insight-chip chip-mid">重要</span>
+            </div>
+          </div>
+          <div class="insight-stat">
+            <strong>46％</strong>が「ベトナム語のYouTuber／TikTokerとのコラボ」、
+            <br><strong>43％</strong>が「SNS広告」を効果的と回答
+          </div>
+          <ul class="insight-points">
+            <li>情報源として強いのは「ベトナム語のインフルエンサー」と「在日ベトナム人コミュニティ」。</li>
+            <li>店頭パッケージだけでは伝わりきらないストーリーを、動画やレビューで補完する役割。</li>
+            <li>korekokoや在日ベトナム人ネットワークと連動し、「認知→体験→口コミ」までの流れを設計できる余地。</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 調査概要 -->
+    <h2>調査概要（イメージ）</h2>
+    <ul class="survey-summary">
+      <li><span class="survey-label">調査名称</span>在日ベトナム人の日本製品・ギフト需要に関する実態調査 2025</li>
+      <li><span class="survey-label">調査主体</span>株式会社グローバル・デイリー</li>
+      <li><span class="survey-label">調査協力</span>株式会社シュパーブ</li>
+      <li><span class="survey-label">調査方法</span>オンラインアンケート（korekoko 在留外国人ネットワークおよび在日ベトナム人コミュニティを通じた配信）</li>
+      <li><span class="survey-label">調査対象</span>日本在住のベトナム人 50〜100名（予定）</li>
+      <li><span class="survey-label">調査期間</span>2025年◯月◯日〜◯月◯日（予定）</li>
+      <li><span class="survey-label">設問数</span>全15問（単一選択・複数選択・自由記述）</li>
+    </ul>
+
+    <!-- サービス紹介 -->
+    <div class="service-section">
+      <h3>在日ベトナム人ソリューションについて</h3>
+      <p>
+        グローバル・デイリーでは、在留外国人向けマーケティングソリューション
+        「<a href="https://korekoko.jp" target="_blank" rel="noopener">korekoko（コレココ）</a>」と、
+        在日ベトナム人ネットワークを有する株式会社シュパーブとの連携により、
+        在日ベトナム人を対象としたリサーチからPR・マーケティング施策まで一貫したサポートが可能です。
+      </p>
+      <ul>
+        <li>在日ベトナム人向けアンケート調査・グループインタビュー</li>
+        <li>ベトナム市場・インバウンド市場を見据えた商品テスト・パッケージテスト</li>
+        <li>在日ベトナム人インフルエンサー・コミュニティ連動のプロモーション企画</li>
+      </ul>
+      <p>
+        詳細や個別のご相談については、<a href="https://www.gldaily.com" target="_blank" rel="noopener">グローバル・デイリー公式サイト</a>よりお問い合わせください。
+      </p>
+    </div>
+
+  </article>
+</div>
+
+</body>
+</html>
